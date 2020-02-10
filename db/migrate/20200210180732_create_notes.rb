@@ -4,9 +4,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :content
       t.string :type
-      t.integer :games_platforms_user_id
-
-      t.timestamps
+      t.belongs_to :collection
     end
   end
 end

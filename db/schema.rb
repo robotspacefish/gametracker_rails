@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_09_183422) do
+ActiveRecord::Schema.define(version: 2020_02_10_180732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "games_platform_id"
+    t.boolean "currently_playing"
+    t.boolean "want_to_play"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["games_platform_id"], name: "index_collections_on_games_platform_id"
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "title"
@@ -25,17 +37,11 @@ ActiveRecord::Schema.define(version: 2020_02_09_183422) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "games_platforms", id: false, force: :cascade do |t|
-    t.bigint "game_id", null: false
-    t.bigint "platform_id", null: false
-  end
-
-  create_table "games_platforms_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "games_platform_id", null: false
-    t.boolean "currently_playing"
-    t.boolean "want_to_play"
-    t.boolean "completed"
+  create_table "games_platforms", force: :cascade do |t|
+    t.bigint "game_id"
+    t.bigint "platform_id"
+    t.index ["game_id"], name: "index_games_platforms_on_game_id"
+    t.index ["platform_id"], name: "index_games_platforms_on_platform_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -59,9 +65,8 @@ ActiveRecord::Schema.define(version: 2020_02_09_183422) do
     t.string "title"
     t.string "content"
     t.string "type"
-    t.integer "games_platforms_user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "collection_id"
+    t.index ["collection_id"], name: "index_notes_on_collection_id"
   end
 
   create_table "platforms", force: :cascade do |t|
