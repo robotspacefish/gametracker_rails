@@ -1,4 +1,4 @@
-class Collection < ApplicationRecord
+class OwnedGame < ApplicationRecord
   belongs_to :user
   belongs_to :games_platform
 

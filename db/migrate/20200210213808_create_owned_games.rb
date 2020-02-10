@@ -1,6 +1,6 @@
-class CreateCollection < ActiveRecord::Migration[6.0]
+class CreateOwnedGames < ActiveRecord::Migration[6.0]
   def change
-    create_table :collections do |t|
+    create_table :owned_games do |t|
       t.belongs_to :user
       t.belongs_to :games_platform
       t.boolean :currently_playing

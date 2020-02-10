@@ -4,7 +4,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :content
       t.string :type
-      t.belongs_to :collection
+      t.belongs_to :owned_game
     end
   end
 end

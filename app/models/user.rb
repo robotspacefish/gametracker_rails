@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :collections
-  has_many :games_platforms, through: :collections
+  has_many :owned_games
+  has_many :games_platforms, through: :owned_games
 end
