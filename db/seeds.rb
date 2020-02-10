@@ -26,9 +26,9 @@ g5.platforms << p1 << p4
 g6.platforms << p3
 
 
-u1 = User.create(username: "jess00", password: "password")
-u2 = User.create(username: "penzo", password: "password")
-u3 = User.create(username: "p1x3l", password: "password")
+u1 = User.create(username: "jess00", email: "jess00@gmail.com", password: "password")
+u2 = User.create(username: "penzo", email: "penzo@gmail.com", password: "password")
+u3 = User.create(username: "p1x3l", email: "p1x3l@gmail.com", password: "password")
 
 
 u1.games_platforms << GamesPlatform.first
