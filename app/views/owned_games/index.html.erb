@@ -2,11 +2,11 @@
   <h2>You have no games in your library!<h2>
 <% else %>
   <ul>
-    <% @owned_games.each do |c| %>
+    <% @owned_games.each do |og| %>
       <li>
-        <%= link_to c.games_platform.game.title, game_path(c.games_platform.game) %>
+        <%= link_to og.game.title, game_path(og.game) %>
         -
-        <%= c.games_platform.platform.name %>
+        <%= og.platform.name %>
       </li>
     <% end %>
   </ul>
