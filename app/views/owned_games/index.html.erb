@@ -4,9 +4,9 @@
   <ul>
     <% @owned_games.each do |og| %>
       <li>
-        <%= link_to og.games_platform.game.title, game_path(og.games_platform.game) %>
+        <%= link_to og.game.title, game_path(og.game) %>
         -
-        <%= og.games_platform.platform.name %>
+        <%= og.platform.name %>
       </li>
     <% end %>
   </ul>
