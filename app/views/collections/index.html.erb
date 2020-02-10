@@ -3,7 +3,7 @@
 <% else %>
   <ul>
     <% @collections.each do |c| %>
-      <li> <%= c.games_platform.game.title %> </li>
+      <li> <%= link_to c.games_platform.game.title, game_path(c.games_platform.game) %> </li>
     <% end %>
   </ul>
 <% end %>
