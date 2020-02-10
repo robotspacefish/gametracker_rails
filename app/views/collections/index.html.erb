@@ -1,0 +1,9 @@
+<% if !@collections %>
+  <h2>You have no games in your library!<h2>
+<% else %>
+  <ul>
+    <% @collections.each do |c| %>
+      <li> <%= c.games_platform.game.title %> </li>
+    <% end %>
+  </ul>
+<% end %>
