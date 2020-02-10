@@ -1,3 +1,3 @@
 class Note < ApplicationRecord
-  belongs_to :games_platforms_users
+  belongs_to :collections
 end
