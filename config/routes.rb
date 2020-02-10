@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # resources :genres
   # resources :images
   # resources :platforms
-  # resources :games
+
+  resources :games
 
   resources :users do
     resources :collections, only: [:index]
