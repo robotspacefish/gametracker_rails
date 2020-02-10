@@ -1,8 +1,9 @@
-class CollectionsController < ApplicationController
+class OwnedGamesController < ApplicationController
 
   def index
+    binding.pry
     if params[:user_id] && user = User.find_by(id: params[:user_id])
-      @collections = user.collections
+      @owned_games = user.owned_games
     else
       # redirect?
     end

@@ -10,22 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_180732) do
+ActiveRecord::Schema.define(version: 2020_02_10_213808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "collections", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "games_platform_id"
-    t.boolean "currently_playing"
-    t.boolean "want_to_play"
-    t.boolean "completed"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["games_platform_id"], name: "index_collections_on_games_platform_id"
-    t.index ["user_id"], name: "index_collections_on_user_id"
-  end
 
   create_table "games", force: :cascade do |t|
     t.string "title"
@@ -65,8 +53,20 @@ ActiveRecord::Schema.define(version: 2020_02_10_180732) do
     t.string "title"
     t.string "content"
     t.string "type"
-    t.bigint "collection_id"
-    t.index ["collection_id"], name: "index_notes_on_collection_id"
+    t.bigint "owned_game_id"
+    t.index ["owned_game_id"], name: "index_notes_on_owned_game_id"
+  end
+
+  create_table "owned_games", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "games_platform_id"
+    t.boolean "currently_playing"
+    t.boolean "want_to_play"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["games_platform_id"], name: "index_owned_games_on_games_platform_id"
+    t.index ["user_id"], name: "index_owned_games_on_user_id"
   end
 
   create_table "platforms", force: :cascade do |t|
