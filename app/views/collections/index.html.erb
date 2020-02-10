@@ -1,0 +1,13 @@
+<% if !@collections %>
+  <h2>You have no games in your library!<h2>
+<% else %>
+  <ul>
+    <% @collections.each do |c| %>
+      <li>
+        <%= link_to c.games_platform.game.title, game_path(c.games_platform.game) %>
+        -
+        <%= c.games_platform.platform.name %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

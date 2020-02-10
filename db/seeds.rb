@@ -26,18 +26,39 @@ g5.platforms << p1 << p4
 g6.platforms << p3
 
 
-User.create(username: "jess00", password: "password")
-User.create(username: "penzo", password: "password")
-User.create(username: "p1x3l", password: "password")
+u1 = User.create(username: "jess00", password: "password")
+u2 = User.create(username: "penzo", password: "password")
+u3 = User.create(username: "p1x3l", password: "password")
 
-User.all.each do |user|
-  total_gp = rand(6)
 
-  total_gp.times do
-    gp = GamesPlatform.all.sample
+u1.games_platforms << GamesPlatform.first
+u1.games_platforms << GamesPlatform.second
+u1.games_platforms << GamesPlatform.all[4]
+u1.games_platforms << GamesPlatform.all[5]
+u1.games_platforms << GamesPlatform.all[7]
+u1.games_platforms << GamesPlatform.all[8]
 
-    if !user.games_platforms.include?(gp)
-      user.games_platforms << gp
-    end
-  end
-end
+u2.games_platforms << GamesPlatform.first
+u2.games_platforms << GamesPlatform.second
+u2.games_platforms << GamesPlatform.third
+u2.games_platforms << GamesPlatform.all[6]
+u2.games_platforms << GamesPlatform.all[8]
+
+u3.games_platforms << GamesPlatform.third
+u3.games_platforms << GamesPlatform.all[7]
+u3.games_platforms << GamesPlatform.all[8]
+
+
+
+
+# User.all.each do |user|
+#   total_gp = rand(6)
+
+#   total_gp.times do
+#     gp = GamesPlatform.all.sample
+
+#     if !user.games_platforms.include?(gp)
+#       user.games_platforms << gp
+#     end
+#   end
+# end
