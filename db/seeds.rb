@@ -53,6 +53,20 @@ u3.games_platforms << GamesPlatform.all[7]
 u3.games_platforms << GamesPlatform.all[8]
 
 
+OwnedGame.first.notes.create(title: "Donec sed odio dui.", content: "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.", objective_type: "next")
+
+OwnedGame.first.notes.create(title: "Integer posuere erat a ante venenatis dapibus posuere velit aliquet.")
+
+OwnedGame.first.notes.create(title: "Lorem ipsum dolor sit", objective_type: "last")
+
+OwnedGame.second.notes.create(title: "Venenatis Magna Cras", objective_type: "next")
+
+OwnedGame.second.notes.create(title: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", objective_type: "last")
+
+OwnedGame.first.update(currently_playing: true)
+OwnedGame.all[7].update(completed: true)
+OwnedGame.all[4].update(completed: true)
+OwnedGame.all[9].update(completed: true)
 
 
 # User.all.each do |user|
