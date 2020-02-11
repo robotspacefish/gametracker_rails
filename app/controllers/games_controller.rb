@@ -19,5 +19,9 @@ class GamesController < ApplicationController
     redirect_to games_path if !@game || !@game.custom #todo error
   end
 
+  private
+    def game_params
+      params.require(:game).permit(:title, :summary)
+    end
 
 end
