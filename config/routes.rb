@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :notes, only: [:new, :create, :edit, :destroy]
+  resources :notes, only: [:new, :create, :edit, :delete]
 
   # resources :genres
   # resources :images
