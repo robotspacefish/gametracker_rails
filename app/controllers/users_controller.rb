@@ -19,6 +19,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find_by(id: params[:user_id])
+    redirect_to root_path if !@user || !is_current_user?(@user)
+  end
+
+  def update
+    @user = User.find_by(id: params[:id])
+    @user.update(user_params)
+
+    if @user.save
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   def show
     @user = User.find_by(id: params[:id])
     redirect_to root_path if !is_current_user?(@user)

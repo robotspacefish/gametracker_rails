@@ -1,0 +1,13 @@
+<h1><%= @user.username %>'s Account</h1>
+
+<%= form_for(@user) do |f| %>
+  <%= f.label :username, "Update Username" %>
+  <%= f.text_field :username %><br>
+  <%= f.label :email, "Update Email" %>
+  <%= f.text_field :email %><br>
+  <%= f.label :password, "Update Password" %>
+  <%= f.text_field :password %><br>
+  <%= f.label :password_confirmation, "Password Confirmation" %>
+  <%= f.text_field :password_confirmation %><br>
+  <%= f.submit %>
+<% end %>
