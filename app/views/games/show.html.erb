@@ -1,1 +1,9 @@
-<%= @game.title %>
+<h1><%= @game.title %></h1>
+
+<p><strong>Platforms:</strong></p>
+
+<% @game.platforms.each do |p| %>
+  <%= p.name %>
+<% end %>
+
+<p><%= @game.summary %></p>
