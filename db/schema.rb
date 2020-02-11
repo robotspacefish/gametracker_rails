@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_213808) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.string "type"
+    t.string "objective_type"
     t.bigint "owned_game_id"
     t.index ["owned_game_id"], name: "index_notes_on_owned_game_id"
   end

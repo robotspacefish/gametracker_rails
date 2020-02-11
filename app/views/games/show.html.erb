@@ -1,4 +1,6 @@
-<h1><%= @game.title %></h1>
+
+<h1><%= @game.title %> <%= "[Custom]" if @game.custom %></h1>
+<%= link_to "Edit", edit_game_path(@game) if @game.custom %>
 
 <p><strong>Platforms:</strong></p>
 
@@ -7,3 +9,13 @@
 <% end %>
 
 <p><%= @game.summary %></p>
+
+<p><strong>TODO: Currently Playing / Want to Play / Completed Status </strong></p>
+<hr>
+<h3>TODO: Notes if current user owns this game</h3>
+<p><strong>Next Objective:</strong></p>
+<p><strong>Last Objective Completed:</strong></p>
+<p><strong>Misc:</strong></p>
+
+
+
