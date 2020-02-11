@@ -1,3 +1,3 @@
 class Note < ApplicationRecord
-  belongs_to :collections
+  belongs_to :owned_game
 end
