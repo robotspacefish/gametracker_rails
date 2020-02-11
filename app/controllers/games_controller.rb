@@ -16,7 +16,7 @@ class GamesController < ApplicationController
 
   def edit
     @game = Game.find_by(id: params[:id])
-    redirect_to games_path if !@game #todo error
+    redirect_to games_path if !@game || !@game.custom #todo error
   end
 
 
