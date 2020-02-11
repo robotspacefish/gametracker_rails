@@ -5,4 +5,7 @@ class Game < ApplicationRecord
   has_many :platforms, through: :games_platforms
 
   scope :sort_by_title, -> { order(:title) }
-end
+
+  def is_owned?
+    !!GamesPlatform.joins(:owned_games).find_by(game_id: self.id)
+  end
