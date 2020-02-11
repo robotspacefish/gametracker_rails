@@ -6,10 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-g1 = Game.create(title: "Hollow Knight", custom: true)
-g2 = Game.create(title: "Mass Effect", custom: true)
-g3 = Game.create(title: "Fallout: New Vegas", custom: true)
-g4 = Game.create(title: "The Legend of Zelda", custom: true)
+summary = <<-SUMMARY
+  Nullam quis risus eget urna mollis ornare vel eu leo. Aenean lacinia bibendum nulla sed consectetur. Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.
+SUMMARY
+
+g1 = Game.create(title: "Hollow Knight", custom: true, summary: summary)
+g2 = Game.create(title: "Mass Effect", custom: true, summary: summary)
+g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary)
+g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary)
 g5 = Game.create(title: "Gears of War", custom: true)
 g6 = Game.create(title: "The Last of Us", custom: true)
 
