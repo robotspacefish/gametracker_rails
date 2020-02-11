@@ -20,8 +20,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to root_path if !is_current_user?(params[:id])
     @user = User.find_by(id: params[:id])
+    redirect_to root_path if !is_current_user?(@user)
   end
 
   private

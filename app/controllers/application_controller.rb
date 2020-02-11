@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       redirect_to root_path if !logged_in?
     end
 
-    def is_current_user?(id)
-      id.to_s == current_user.id.to_s
+    def is_current_user?(user)
+      user == current_user
     end
 end

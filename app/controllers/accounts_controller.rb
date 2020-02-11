@@ -3,6 +3,6 @@ class AccountsController < ApplicationController
 
   def index
     @user = User.find_by(id: params[:user_id])
-    redirect_to root_path if !@user || @user != current_user
+    redirect_to root_path if !@user || !is_current_user?(@user)
   end
 end
