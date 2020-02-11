@@ -7,5 +7,16 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by(id: params[:id])
+
+    # is game owned?
+
+    # if so, display owner information (notes, status, etc)
   end
+
+  def edit
+    @game = Game.find_by(id: params[:id])
+    redirect_to games_path if !@game #todo error
+  end
+
+
 end
