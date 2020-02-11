@@ -40,6 +40,14 @@ class UsersController < ApplicationController
     redirect_to root_path if !is_current_user?(@user)
   end
 
+  def destroy
+    @user = User.find_by(id: params[:id])
+    @user.destroy
+    session.clear
+
+    redirect_to root_path
+  end
+
   private
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
