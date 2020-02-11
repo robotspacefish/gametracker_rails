@@ -5,6 +5,6 @@ class User < ApplicationRecord
 
   has_many :owned_games
   has_many :games_platforms, through: :owned_games
-
-   scope :sort_by_username, -> { order(:username) }
+  has_many :games, through: :games_platforms
+  scope :sort_by_username, -> { order(:username) }
 end
