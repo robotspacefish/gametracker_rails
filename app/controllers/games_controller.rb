@@ -7,6 +7,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by(id: params[:id])
+    redirect_to games_path if !@game #todo error
 
     # is game owned?
 
