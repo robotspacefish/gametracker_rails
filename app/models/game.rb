@@ -8,5 +8,6 @@ class Game < ApplicationRecord
   scope :sort_by_title, -> { order(:title) }
 
   def is_owned?
-    !!GamesPlatform.joins(:owned_games).find_by(game_id: self.id)
+    !self.users.empty?
   end
+end
