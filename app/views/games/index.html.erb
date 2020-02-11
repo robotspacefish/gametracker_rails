@@ -8,8 +8,15 @@
       <%= link_to game.title, game_path(game) %>
       -
       <% game.platforms.each do |p| %>
-        <%= p.name %>
+        <% if current_user.owns_game_platform?(game.id, p.id) %>
+            <%= p.name %> [Owned]
+        <% else %>
+          <%= form_for(game) do |f| %>
+            <%= f.submit "Add for #{p.name}"%>
+          <% end %>
+        <% end %>
       <% end %>
+      <br>
     </div>
   <% end %>
 <% end %>
