@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     def redirect_if_not_logged_in
       redirect_to root_path if !logged_in?
     end
+
+    def is_current_user?(id)
+      id.to_s == current_user.id.to_s
+    end
 end

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :redirect_if_not_logged_in
 
+  def index
+    @users = User.sort_by_username
+  end
+
   def new
     @user = User.new
   end
@@ -13,6 +17,11 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    redirect_to root_path if !is_current_user?(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   private
