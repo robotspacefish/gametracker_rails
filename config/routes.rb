@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :games
 
-  resources :users, only: [:index, :new, :create, :show, :update, :destroy] do
+  resources :users do
     # resources :collections, only: [:index]
     get '/collection', to: 'owned_games#index'
     get '/account', to: 'users#edit'
