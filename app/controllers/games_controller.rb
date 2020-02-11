@@ -19,6 +19,17 @@ class GamesController < ApplicationController
     redirect_to games_path if !@game || !@game.custom #todo error
   end
 
+  def update
+    @game = Game.find_by(id: params[:id])
+    @game.update(game_params)
+
+    if @game.save
+      redirect_to game_path(@game)
+    else
+      render :edit
+    end
+  end
+
   private
     def game_params
       params.require(:game).permit(:title, :summary)
