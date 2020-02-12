@@ -16,8 +16,15 @@ class OwnedGamesController < ApplicationController
     @game = Game.find_by(id: params[:game_id])
 
     redirect_to games_path if !@game
+  end
 
-    @owned_game = OwnedGame.new
+  def create
+    # todo look for existing ownership?
+    # require a platform select
+    # verify saves by length matching platforms chosen length
+    OwnedGame.create_owned_game_from_params(owned_game_params)
+    redirect_to games_path
+  end
 
   private
     def owned_game_params
