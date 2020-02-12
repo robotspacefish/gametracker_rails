@@ -1,24 +1,17 @@
 Rails.application.routes.draw do
   root "sessions#home"
 
-  get '/signup', to: 'users#new'
-  post '/signup', to: 'users#create'
-
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
+
   resources :notes, only: [:new, :create, :edit, :delete]
-
-  # resources :genres
-  # resources :images
-  # resources :platforms
-
-
   resources :games
 
   resources :users do
-    # resources :collections, only: [:index]
     get '/collection', to: 'owned_games#index'
     get '/account', to: 'users#edit'
   end
