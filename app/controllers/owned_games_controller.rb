@@ -11,4 +11,12 @@ class OwnedGamesController < ApplicationController
       redirect_to games_path
     end
   end
-end
+
+  def new
+    @game = Game.find_by(id: params[:game_id])
+
+    redirect_to games_path if !@game
+
+    @owned_game = OwnedGame.new
+
+  end
