@@ -7,14 +7,11 @@
     <div>
       <%= link_to game.title, game_path(game) %>
       -
-      <% game.platforms.each do |p| %>
-        <% if current_user.owns_game_platform?(game.id, p.id) %>
-            <%= p.name %> [Owned]
-        <% else %>
-          <%= form_for(game) do |f| %>
-            <%= f.submit "Add for #{p.name}"%>
-          <% end %>
-        <% end %>
+
+      <% if game.platforms.any? { |p| current_user.owns_game_platform?(game.id, p.id) } %>
+        [Owned]
+      <% else %>
+        <%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: game.id) %>
       <% end %>
       <br>
     </div>
