@@ -19,4 +19,8 @@ class OwnedGamesController < ApplicationController
 
     @owned_game = OwnedGame.new
 
-  end
+  private
+    def owned_game_params
+      params.require(:owned_game).permit(:currently_playing, :want_to_play, :completed, :game_id, :platform_ids => [])
+    end
+end
