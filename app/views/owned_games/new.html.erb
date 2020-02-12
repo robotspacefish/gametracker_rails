@@ -1,0 +1,7 @@
+<h1>Add <%= @game.title %></h1>
+<p><%= @game.summary %></p>
+
+<%= form_for(:owned_game, url: user_collection_path) do |f| %>
+  <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: false) %>
+  <%= f.submit "Add to Collection" %>
+<% end %>
