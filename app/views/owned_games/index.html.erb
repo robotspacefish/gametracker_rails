@@ -7,8 +7,7 @@
     <% @owned_games.each do |g| %>
       <li>
         <%= link_to g.title, game_path(g) %>
-        -
-
+        - <%= g.which_platforms?(current_user).join(' | ') %>
       </li>
     <% end %>
   </ul>

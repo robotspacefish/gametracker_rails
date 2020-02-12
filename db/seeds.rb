@@ -15,7 +15,7 @@ g2 = Game.create(title: "Mass Effect", custom: true, summary: summary)
 g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary)
 g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary)
 g5 = Game.create(title: "Gears of War", custom: true)
-g6 = Game.create(title: "The Last of Us", custom: true)
+g6 = Game.create(title: "The Last of Us")
 
 p1 = Platform.create(name: "Xbox One")
 p2 = Platform.create(name: "Nintendo Switch")
