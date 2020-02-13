@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
-  resources :notes, only: [:new, :create, :edit, :delete]
+  resources :games do
+    resources :notes, only: [:new, :create]
+  end
 
-  resources :games
+  resources :notes, only: [:edit, :update, :delete]
 
   resources :users do
     # resources :owned_games, only: [:index, :create], as: 'collection'
