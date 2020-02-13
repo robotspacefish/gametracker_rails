@@ -18,8 +18,11 @@
   <% end %>
 
   <h3>Notes</h3>
+  <%= link_to "Add Note", new_game_note_path(@game) %>
+  <br>
 
   <% @owned_game.notes.each do |note| %>
+    <%= link_to "Edit Note", edit_game_note_path(@game) %>
     <p><%= note.title %></p>
   <% end %>
 
