@@ -2,6 +2,6 @@
 
 <ul>
   <% @users.each do |user| %>
-    <li><%= user.username %> owns [_insert total by title_] games</li>
+    <li><%= user.username %> owns <%= user.games.total_by_title %> games</li>
   <% end %>
 </ul>
