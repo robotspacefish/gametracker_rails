@@ -21,7 +21,7 @@
   <%= link_to "Add Note", new_game_note_path(@game) %>
   <br>
 
-  <% @owned_game.notes.each do |note| %>
+  <% @owned_game.notes.sort_newest_first.each do |note| %>
     <hr>
     <div>
       <p><%= note.title %></p>
