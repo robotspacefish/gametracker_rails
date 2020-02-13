@@ -16,6 +16,9 @@ g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary, im
 g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary, image: "https://via.placeholder.com/264x374")
 g5 = Game.create(title: "Gears of War", custom: true, image: "https://via.placeholder.com/264x374")
 g6 = Game.create(title: "The Last of Us", image: "https://via.placeholder.com/264x374")
+g7 = Game.create(title: "Dragon Quest Builders", custom: true, image: "https://via.placeholder.com/264x374")
+g8 = Game.create(title: "Dragon Quest Builders 2", custom: true, image: "https://via.placeholder.com/264x374")
+
 
 p1 = Platform.create(name: "Xbox One")
 p2 = Platform.create(name: "Nintendo Switch")
@@ -28,6 +31,8 @@ g3.platforms << p4
 g4.platforms << p2
 g5.platforms << p1 << p4
 g6.platforms << p3
+g7.platforms << p2 << p3
+g8.platforms << p2 << p3 << p4
 
 
 u1 = User.create(username: "jess00", email: "jess00@gmail.com", password: "password")
