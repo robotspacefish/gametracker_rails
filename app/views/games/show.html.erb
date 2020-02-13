@@ -22,8 +22,12 @@
   <br>
 
   <% @owned_game.notes.each do |note| %>
-    <%= link_to "Edit Note", edit_game_note_path(@game) %>
-    <p><%= note.title %></p>
+    <hr>
+    <div>
+      <p><%= note.title %></p>
+      <p><%= note.content %></p>
+      <%= link_to "Edit Note", edit_note_path(note) %>
+    </div>
   <% end %>
 
 <% end %>
