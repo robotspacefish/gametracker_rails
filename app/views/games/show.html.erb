@@ -22,6 +22,11 @@
 =end%>
 <% if @owned_game %>
   <hr>
+
+  <%= form_for([current_user, @owned_game], user_collection_path, method: :delete) do |f| %>
+    <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
+  <% end %>
+
   <h3>Notes</h3>
 
   <% @owned_game.notes.each do |note| %>
