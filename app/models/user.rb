@@ -21,6 +21,12 @@ class User < ApplicationRecord
     binding.pry
     self.games.include?(Game.find_by(title: title))
   end
+
+  def owns_game_by_instance?(game)
+    binding.pry
+    self.games.include?(game)
+  end
+
   def add_game_by_game_and_platform(game, platform)
     self.games << game
     add_games_platform_by_game_and_platform(game, platform)
