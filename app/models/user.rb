@@ -21,6 +21,12 @@ class User < ApplicationRecord
     self.games << game
     add_games_platform_by_game_and_platform(game, platform)
   end
+
+  def add_game_by_games_platform(games_platform)
+    self.games << Game.find_by(id: games_platform.game_id)
+    self.games_platforms << games_platform
+  end
+
   def add_games_platform_by_game_and_platform(game, platform)
     self.games_platforms << GamesPlatform.find_by_ids(game.id, platform.id)
   end
