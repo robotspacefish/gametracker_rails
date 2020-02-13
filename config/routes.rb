@@ -17,8 +17,10 @@ Rails.application.routes.draw do
     get '/collection', to: 'owned_games#index'
     get '/collection/add_game', to: 'owned_games#new'
     post '/collection', to: 'owned_games#create'
-    delete '/collection/:id', to: 'owned_games#destroy'
     get '/account', to: 'users#edit'
   end
+
+  delete '/collection/:id', to: 'owned_games#destroy', as: 'collection/remove_game'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
