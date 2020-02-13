@@ -27,6 +27,9 @@
       <% end %>
 
     </nav>
+
+    <%= flash[:message] if flash[:message] %>
+
     <%= yield %>
   </body>
 </html>
