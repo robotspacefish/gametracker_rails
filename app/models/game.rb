@@ -4,7 +4,9 @@ class Game < ApplicationRecord
   has_many :games_platforms
   has_many :platforms, through: :games_platforms
 
-  has_many :users, through: :games_platforms
+  has_many :owned_games
+  has_many :users, through: :owned_games
+
 
   scope :sort_by_title, -> { order(:title) }
 

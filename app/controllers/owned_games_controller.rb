@@ -19,11 +19,24 @@ class OwnedGamesController < ApplicationController
   end
 
   def create
-    # todo look for existing ownership?
-    # require a platform select
-    # verify saves by length matching platforms chosen length
-    OwnedGame.create_owned_game_from_params(owned_game_params)
-    redirect_to games_path
+    # todo require a platform select
+
+    if !current_user.owns_game_by_id?(params[:owned_game][:game_id])
+      success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
+
+      if !success
+        flash[:message] = "Select at least 1 platform"
+        @game = Game.find_by(id: params[:owned_game][:game_id])
+        render :new
+        return
+      end
+
+      redirect_to user_collection_path(current_user)
+
+    else
+      redirect_to games_path
+    end
+
   end
 
   private

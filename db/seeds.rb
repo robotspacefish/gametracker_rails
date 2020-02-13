@@ -34,24 +34,13 @@ u1 = User.create(username: "jess00", email: "jess00@gmail.com", password: "passw
 u2 = User.create(username: "penzo", email: "penzo@gmail.com", password: "password")
 u3 = User.create(username: "p1x3l", email: "p1x3l@gmail.com", password: "password")
 
+u1.add_game_by_games_platform(GamesPlatform.first)
+u1.add_game_by_games_platform(GamesPlatform.all[5])
 
-u1.games_platforms << GamesPlatform.first
-u1.games_platforms << GamesPlatform.second
-u1.games_platforms << GamesPlatform.all[4]
-u1.games_platforms << GamesPlatform.all[5]
-u1.games_platforms << GamesPlatform.all[7]
-u1.games_platforms << GamesPlatform.all[8]
+u2.add_game_by_games_platform(GamesPlatform.first)
 
-u2.games_platforms << GamesPlatform.first
-u2.games_platforms << GamesPlatform.second
-u2.games_platforms << GamesPlatform.third
-u2.games_platforms << GamesPlatform.all[6]
-u2.games_platforms << GamesPlatform.all[8]
-
-u3.games_platforms << GamesPlatform.third
-u3.games_platforms << GamesPlatform.all[7]
-u3.games_platforms << GamesPlatform.all[8]
-
+u3.add_game_by_games_platform(GamesPlatform.third)
+u3.add_game_by_games_platform(GamesPlatform.all[7])
 
 OwnedGame.first.notes.create(title: "Donec sed odio dui.", content: "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.", objective_type: "next")
 
@@ -64,19 +53,5 @@ OwnedGame.second.notes.create(title: "Venenatis Magna Cras", objective_type: "ne
 OwnedGame.second.notes.create(title: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.", objective_type: "last")
 
 OwnedGame.first.update(currently_playing: true)
-OwnedGame.all[7].update(completed: true)
-OwnedGame.all[4].update(completed: true)
-OwnedGame.all[9].update(completed: true)
-
-
-# User.all.each do |user|
-#   total_gp = rand(6)
-
-#   total_gp.times do
-#     gp = GamesPlatform.all.sample
-
-#     if !user.games_platforms.include?(gp)
-#       user.games_platforms << gp
-#     end
-#   end
-# end
+OwnedGame.second.update(completed: true)
+OwnedGame.third.update(completed: true)
