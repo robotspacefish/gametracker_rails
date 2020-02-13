@@ -5,6 +5,8 @@ class CreateNotes < ActiveRecord::Migration[6.0]
       t.string :content
       t.boolean :completed
       t.belongs_to :owned_game
+
+      t.timestamps
     end
   end
 end

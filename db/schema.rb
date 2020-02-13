@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_02_13_160321) do
     t.string "content"
     t.boolean "completed"
     t.bigint "owned_game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["owned_game_id"], name: "index_notes_on_owned_game_id"
   end
 
