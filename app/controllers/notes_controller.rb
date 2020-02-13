@@ -5,8 +5,7 @@ class NotesController < ApplicationController
     # find owned game by game_id
     @game = Game.find(params[:game_id])
     if owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
-      # build note off owned game
-      @note = owned_game.notes.build
+      @note = Note.new
     else
       redirect_to games_path
     end
