@@ -50,4 +50,8 @@ class User < ApplicationRecord
   def find_owned_game_by_game_id(g_id)
     self.owned_games.find_by(game_id: g_id)
   end
+
+  def owns_game_on_all_platforms?(game)
+    self.games.find_by(id: game.id).which_platforms?(self).size == game.platforms.size
+  end
 end
