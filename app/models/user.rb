@@ -54,4 +54,10 @@ class User < ApplicationRecord
   def owns_game_on_all_platforms?(game)
     self.games.find_by(id: game.id).which_platforms?(self).size == game.platforms.size
   end
+
+  def delete_from_collection(game)
+    self.owned_games.find_by(game_id: game.id).destroy
+    ogs = OwnedGamesPlatform.joins(:games_platform).where("user_id = ? AND game_id = ?", self.id, game.id)
+    ogs.destroy_all
+  end
 end
