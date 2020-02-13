@@ -20,4 +20,7 @@ class Game < ApplicationRecord
     user.games_platforms.where(game_id: self.id).joins(:platform).pluck(:name)
   end
 
+  def on_multiple_platforms?
+    self.platforms.size > 1
+  end
 end
