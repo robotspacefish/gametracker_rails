@@ -23,7 +23,7 @@
 <% if @owned_game %>
   <hr>
 
-  <%= form_for([current_user, @owned_game], user_collection_path, method: :delete) do |f| %>
+  <%= form_for(@owned_game, url: collection_remove_game_path(@game), method: 'delete') do |f| %>
     <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
   <% end %>
 
