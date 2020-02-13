@@ -19,15 +19,15 @@ class OwnedGame < ApplicationRecord
       want_to_play: params["want_to_play"]
     )
 
-    gps = []
+    owned_games = []
 
     if og.save
-      gps.collect do |gp|
+      owned_games = gps.collect do |gp|
       ogs = OwnedGamesPlatform.new(user_id: user_id, games_platform_id: gp.id)
       ogs.save
       end
     end
 
-    gps.all?
+    owned_games.all?
   end
 end
