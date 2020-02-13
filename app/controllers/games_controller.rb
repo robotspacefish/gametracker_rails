@@ -9,9 +9,8 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     redirect_to games_path if !@game #todo error
 
-    # is game owned?
-
-    # if so, display owner information (notes, status, etc)
+    owned_game = current_user.find_owned_game_by_game_id(@game.id)
+    @notes = owned_game.notes if owned_game
   end
 
   def edit
