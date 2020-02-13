@@ -59,20 +59,20 @@ ActiveRecord::Schema.define(version: 2020_02_12_214610) do
 
   create_table "owned_games", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "games_id"
+    t.bigint "game_id"
     t.boolean "currently_playing"
     t.boolean "want_to_play"
     t.boolean "completed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["games_id"], name: "index_owned_games_on_games_id"
+    t.index ["game_id"], name: "index_owned_games_on_game_id"
     t.index ["user_id"], name: "index_owned_games_on_user_id"
   end
 
   create_table "owned_games_platforms", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "game_platform_id"
-    t.index ["game_platform_id"], name: "index_owned_games_platforms_on_game_platform_id"
+    t.bigint "games_platform_id"
+    t.index ["games_platform_id"], name: "index_owned_games_platforms_on_games_platform_id"
     t.index ["user_id"], name: "index_owned_games_platforms_on_user_id"
   end
 
