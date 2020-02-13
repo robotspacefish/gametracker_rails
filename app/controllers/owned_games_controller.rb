@@ -39,6 +39,15 @@ class OwnedGamesController < ApplicationController
 
   end
 
+  def destroy
+    @game = Game.find_by(id: params[:id])
+    if @game && current_user.owns_game_by_instance?(@game)
+      current_user.delete_from_collection(@game)
+    end
+
+    redirect_to user_collection_path(current_user)
+  end
+
   private
     def owned_game_params
       params.require(:owned_game).permit(:currently_playing, :want_to_play, :completed, :game_id, :platform_ids => [])
