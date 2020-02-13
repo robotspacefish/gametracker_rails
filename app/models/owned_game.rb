@@ -11,18 +11,21 @@ class OwnedGame < ApplicationRecord
 
     return false if gps.empty?
 
-    gps.collect do |gp|
-      og = OwnedGame.new(
-        user_id: user_id,
-        game_id: params["game_id"],
-        completed: params["completed"],
-        currently_playing: params["currently_playing"],
-        want_to_play: params["want_to_play"]
-      )
+    og = OwnedGame.new(
+      user_id: user_id,
+      game_id: params["game_id"],
+      completed: params["completed"],
+      currently_playing: params["currently_playing"],
+      want_to_play: params["want_to_play"]
+    )
 
+    gps = []
+
+    if og.save
+      gps.collect do |gp|
       ogs = OwnedGamesPlatform.new(user_id: user_id, games_platform_id: gp.id)
-
-      og.save && ogs.save
+      ogs.save
+      end
     end
 
     gps.all?
