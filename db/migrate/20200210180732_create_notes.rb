@@ -3,7 +3,7 @@ class CreateNotes < ActiveRecord::Migration[6.0]
     create_table :notes do |t|
       t.string :title
       t.string :content
-      t.string :objective_type
+      t.boolean :completed
       t.belongs_to :owned_game
     end
   end
