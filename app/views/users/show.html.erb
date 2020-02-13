@@ -1,5 +1,7 @@
 <h1><%= @user.username %>'s Home Page</h1>
 
-TODO:
-<li>Recently Added</li>
-<li>Currently Playing</li>
+<h2>Currently Playing</h2>
+
+<% @user.currently_playing.each do |game| %>
+  <li><%= game.title %></li>
+<% end %>
