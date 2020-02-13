@@ -1,3 +1,4 @@
+<%= flash[:message] if flash[:message] %>
 
 <h1><%= @game.title %> <%= "[Custom]" if @game.custom %></h1>
 <%= link_to "Edit", edit_game_path(@game) if @game.custom %>

@@ -7,7 +7,8 @@ class NotesController < ApplicationController
     if owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
       @note = Note.new
     else
-      redirect_to games_path
+      flash[:message] = "You need to add the game to your collection before you can add a note"
+      redirect_to game_path(@game)
     end
   end
 
