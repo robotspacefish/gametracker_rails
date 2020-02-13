@@ -7,13 +7,14 @@
     <div>
       <%= link_to game.title, game_path(game) %>
       -
-
       <% if game.platforms.any? { |p| current_user.owns_game_platform?(game.id, p.id) } %>
         [Owned]
       <% else %>
         <%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: game.id) %>
       <% end %>
       <br>
+      <%= image_tag(game.image, alt: game.title) %>
     </div>
+    <br>
   <% end %>
 <% end %>

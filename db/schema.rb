@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_214610) do
+ActiveRecord::Schema.define(version: 2020_02_13_160321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_02_12_214610) do
     t.boolean "custom"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "games_platforms", force: :cascade do |t|
@@ -34,17 +35,6 @@ ActiveRecord::Schema.define(version: 2020_02_12_214610) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "height"
-    t.string "width"
-    t.integer "image_id"
-    t.string "url"
-    t.string "type"
-    t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -78,7 +68,6 @@ ActiveRecord::Schema.define(version: 2020_02_12_214610) do
 
   create_table "platforms", force: :cascade do |t|
     t.string "name"
-    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
