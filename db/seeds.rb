@@ -35,17 +35,12 @@ u2 = User.create(username: "penzo", email: "penzo@gmail.com", password: "passwor
 u3 = User.create(username: "p1x3l", email: "p1x3l@gmail.com", password: "password")
 
 u1.add_game_by_games_platform(GamesPlatform.first)
-u1.add_game_by_games_platform(GamesPlatform.second)
-u1.add_game_by_games_platform(GamesPlatform.all[4])
 u1.add_game_by_games_platform(GamesPlatform.all[5])
 
 u2.add_game_by_games_platform(GamesPlatform.first)
-u2.add_game_by_games_platform(GamesPlatform.second)
 
 u3.add_game_by_games_platform(GamesPlatform.third)
 u3.add_game_by_games_platform(GamesPlatform.all[7])
-u3.add_game_by_games_platform(GamesPlatform.all[8])
-
 
 OwnedGame.first.notes.create(title: "Donec sed odio dui.", content: "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam quis risus eget urna mollis ornare vel eu leo.", objective_type: "next")
 
