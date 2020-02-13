@@ -1,6 +1,6 @@
 <% if !@owned_games %>
   <h2>You have no games in your library!<h2>
-
+<% else %>
   <ul>
     <% @owned_games.each do |g| %>
       <div>
