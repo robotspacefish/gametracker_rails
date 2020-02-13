@@ -1,4 +1,4 @@
-<% if !@owned_games %>
+<% if @owned_games.empty? %>
   <h2>You have no games in your library!<h2>
 <% else %>
   <ul>
