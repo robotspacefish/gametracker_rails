@@ -20,11 +20,11 @@
 <p><strong>Misc:</strong></p>
 <%
 =end%>
-<% if @notes %>
+<% if @owned_game %>
   <hr>
   <h3>Notes</h3>
 
-  <% @notes.each do |note| %>
+  <% @owned_game.notes.each do |note| %>
     <p><%= note.title %></p>
   <% end %>
 
