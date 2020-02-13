@@ -10,6 +10,7 @@ class Game < ApplicationRecord
   scope :sort_by_title, -> { order(:title) }
   scope :last_added, -> { order(created_at: :desc).limit(1) }
   scope :recently_added, -> { order(created_at: :desc).limit(3).distinct }
+  scope :total_by_title, -> { count }
 
   def is_owned?
     !self.users.empty?
