@@ -2,12 +2,19 @@
 
 <h2>Recently Added</h2>
 <% @user.games.recently_added.each do |game| %>
-  <li><%= game.title %></li>
+  <div>
+    <%= game.title %><br>
+    <%= image_tag(game.image, alt: game.title) %>
+  </div>
 <% end %>
 
 
 <h2>Currently Playing</h2>
 
 <% @user.currently_playing.each do |game| %>
-  <li><%= game.title %></li>
+  <div>
+    <%= game.title %><br>
+    <%= image_tag(game.image, alt: game.title) %>
+  </div>
+  <br>
 <% end %>
