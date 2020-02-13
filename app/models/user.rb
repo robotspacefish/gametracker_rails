@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def owns_game_by_title?(title)
-    self.games.include?(Game.find_by(title: title))
+    self.games.find_by(title: title)
   end
 
   def owns_game_by_instance?(game)
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def owns_game_by_id?(g_id)
-    self.games.include?(g_id)
+    self.games.find_by(id: g_id)
   end
 
   def add_game_by_game_and_platform(game, platform)
