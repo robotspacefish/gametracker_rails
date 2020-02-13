@@ -2,6 +2,6 @@
 
 <ul>
   <% @users.each do |user| %>
-    <li><%= user.username %> owns <%= user.games.total_by_title %> games</li>
+    <li><%= user.username %> owns <%= pluralize(user.games.total_by_title, "game") %></li>
   <% end %>
 </ul>
