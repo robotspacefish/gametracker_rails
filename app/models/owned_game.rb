@@ -1,6 +1,6 @@
 class OwnedGame < ApplicationRecord
   belongs_to :user
-  belongs_to :games_platform
+  belongs_to :game
 
   has_many :notes
 

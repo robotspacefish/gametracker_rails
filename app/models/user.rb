@@ -4,8 +4,12 @@ class User < ApplicationRecord
   validates :username, :email, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :owned_games
-  has_many :games_platforms, through: :owned_games
-  has_many :games, through: :games_platforms
+  has_many :games, through: :owned_games
+
+  has_many :owned_games_platforms
+  has_many :games_platforms, through: :owned_games_platforms
+
+
   scope :sort_by_username, -> { order(:username) }
 
   def owns_game_platform?(g_id, p_id)
