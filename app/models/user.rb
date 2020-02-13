@@ -43,4 +43,7 @@ class User < ApplicationRecord
     self.games_platforms << GamesPlatform.find_by_ids(game.id, platform.id)
   end
 
+  def currently_playing
+    Game.joins(:owned_games).where('user_id = ? AND currently_playing = ?', self.id, true)
+  end
 end
