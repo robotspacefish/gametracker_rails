@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
+  # had to separate this because it wasn't showing up when it was part of resources :notes
+  delete '/notes/:id', to: 'notes#destroy'
+
   resources :games do
     resources :notes, only: [:new, :create]
   end
 
-  resources :notes, only: [:edit, :update]
-
-  # had to separate this because it wasn't showing up when it was part of resources :notes
-  delete '/notes/:id', to: 'notes#destroy'
+  # resources :notes, only: [:edit, :update]
 
   resources :users do
     # resources :owned_games, only: [:index, :create], as: 'collection'
