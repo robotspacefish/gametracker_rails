@@ -32,4 +32,4 @@ yarn-debug.log*
 
 # My files
 NOTES.md
-api_key.rb
+.env
