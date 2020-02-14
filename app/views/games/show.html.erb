@@ -12,6 +12,8 @@
 <p><%= @game.summary %></p>
 
 <% if @owned_game %>
+  <h3>You own this game on <%= owned_platforms_as_string(current_user, @game) %> </h3>
+
   <hr>
 
   <%= form_for(@owned_game, url: collection_remove_game_path(@game), method: 'delete') do |f| %>
