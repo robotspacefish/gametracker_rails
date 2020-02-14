@@ -25,6 +25,9 @@ class NotesController < ApplicationController
     end
   end
 
+  def edit
+    @note = Note.find_by(id: params[:id])
+  end
   private
     def note_params
       params.require(:note).permit(:title, :content, :completed)
