@@ -20,7 +20,7 @@
     <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
   <% end %>
 
-  <h3>Notes</h3>
+  <h3>Notes/Objectives</h3>
   <%= link_to "Add Note", new_game_note_path(@game) %>
   <br>
 
@@ -29,6 +29,10 @@
     <div>
       <p><%= note.title %></p>
       <%= human_readable_datetime(note.created_at) %>
+      <% if note.completed %>
+        <p><strong>Objective Completed</strong></p>
+      <% end %>
+
       <p><%= note.content %></p>
       <%= link_to "Edit Note", edit_note_path(note) %>
       <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."} %>
