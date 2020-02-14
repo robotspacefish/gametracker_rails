@@ -29,6 +29,16 @@ class NotesController < ApplicationController
     @note = Note.find_by(id: params[:id])
   end
 
+  def update
+    @note = Note.find_by(id: params[:id])
+    @note.update(note_params)
+    if @note.save
+      redirect_to game_path(@note.game)
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @note = Note.find_by(id: params[:id])
     if @note && @note.belongs_to_user?(current_user)
