@@ -5,6 +5,10 @@ class GamesController < ApplicationController
     @games = Game.sort_by_title
   end
 
+  def new
+    @game = Game.new
+  end
+
   def show
     @game = Game.find_by(id: params[:id])
     redirect_to games_path if !@game #todo error
