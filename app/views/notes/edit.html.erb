@@ -1,6 +1,6 @@
 <h1>Edit Note</h1>
 
-<%= form_for([@game, @note]) do |f| %>
+<%= form_for(@note) do |f| %>
   <%= f.label :title %><br>
   <%= f.text_field :title %>
   <br>
