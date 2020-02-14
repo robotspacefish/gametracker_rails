@@ -32,3 +32,4 @@ yarn-debug.log*
 
 # My files
 NOTES.md
+.env
