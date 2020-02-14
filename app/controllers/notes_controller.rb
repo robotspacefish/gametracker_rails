@@ -28,6 +28,19 @@ class NotesController < ApplicationController
   def edit
     @note = Note.find_by(id: params[:id])
   end
+
+  def destroy
+    @note = Note.find_by(id: params[:id])
+    if @note && @note.belongs_to_user?(current_user)
+      @note.destroy
+      redirect_to game_path(@note.game)
+    else
+      #todo change redirect path
+      flash[:message] = "Note not found."
+      redirect_to games_path
+    end
+  end
+
   private
     def note_params
       params.require(:note).permit(:title, :content, :completed)
