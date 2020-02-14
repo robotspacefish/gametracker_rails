@@ -1,0 +1,14 @@
+<h1>Add Custom Game</h1>
+
+<%= form_for(@game) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+
+  <%= f.label :image, "Image URL" %>
+  <%= f.text_field :image %><br>
+
+  <%= f.label :summary %>
+  <%= f.text_area :summary %><br>
+
+  <%= f.submit "Add Game" %>
+<% end %>
