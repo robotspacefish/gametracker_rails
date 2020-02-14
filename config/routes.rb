@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     resources :notes, only: [:new, :create]
   end
 
-  resources :notes, only: [:edit, :update, :delete]
+  resources :notes, only: [:edit, :update]
+
+  # had to separate this because it wasn't showing up when it was part of resources :notes
+  delete '/notes/:id', to: 'notes#destroy'
 
   resources :users do
     # resources :owned_games, only: [:index, :create], as: 'collection'
