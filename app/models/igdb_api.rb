@@ -1,5 +1,4 @@
 require 'net/https'
-require 'pry'
 
 class IgdbApi
   def self.search(game_title)
@@ -7,7 +6,7 @@ class IgdbApi
     http.use_ssl = true
     path = 'https://api-v3.igdb.com/search'
 
-    request = Net::HTTP::Post.new(URI(path), {'user-key' => $api_key})
+    request = Net::HTTP::Post.new(URI(path), {'user-key' => ENV['API_KEY']})
 
     request.body = "fields game.name, game.platforms.name, game.cover.url, game.summary; search \"#{game_title}\"; limit 50;"
 
@@ -34,10 +33,9 @@ class IgdbApi
     http = Net::HTTP.new('api-v3.igdb.com',443)
     http.use_ssl = true
     path = 'https://api-v3.igdb.com/platforms'
-    request = Net::HTTP::Post.new(URI(path), {'user-key' => $api_key})
+    request = Net::HTTP::Post.new(URI(path), {'user-key' => ENV['API_KEY']})
 
-    request.body = 'fields abbreviation, name, limit 500;'
-
+    request.body = 'fields name; limit 500;'
     JSON.parse(http.request(request).body)
   end
 end
