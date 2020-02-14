@@ -24,6 +24,7 @@
     <hr>
     <div>
       <p><%= note.title %></p>
+      <%= human_readable_datetime(note.created_at) %>
       <p><%= note.content %></p>
       <%= link_to "Edit Note", edit_note_path(note) %>
       <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."} %>
