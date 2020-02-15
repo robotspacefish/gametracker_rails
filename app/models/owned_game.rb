@@ -4,10 +4,18 @@ class OwnedGame < ApplicationRecord
 
   has_many :notes
 
-  def self.create_owned_games_from_params(params, user_id)
-    gps = params[:platform_ids].filter { |p_id| !p_id.blank? }.collect do |p_id|
+  def self.remove_blanks_from_array(array)
+    array.filter! { |data| !data.blank? }
+  end
+
+  def self.get_game_platforms(params)
+    remove_blanks_from_array(params[:platform_ids]).collect do |p_id|
       GamesPlatform.find_by_ids(params[:game_id], p_id)
     end
+  end
+
+  def self.create_owned_games_from_params(params, user_id)
+    gps = get_game_platforms(params)
 
     return false if gps.empty?
 
