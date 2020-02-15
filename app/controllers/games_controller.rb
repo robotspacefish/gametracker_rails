@@ -9,6 +9,36 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def create
+    if @game = Game.where("LOWER(title) LIKE ?", params[:game][:title]).take
+      if current_user.owns_game_by_instance?(@game)
+        flash[:message] = "You already own #{@game.title}."
+      else
+        flash[:message] = "#{@game.title} already exists. You can add it here."
+      end
+
+      redirect_to game_path(@game)
+    else
+      @game = Game.new(game_params)
+      @game.custom = true
+
+      if @game.save!
+        # add to user's collection
+        current_user.games << @game
+
+        @game.platforms.each do |p|
+          current_user.add_games_platform_by_game_and_platform(@game, p)
+        end
+
+        flash[:message] = "Successfully added #{@game.title} to your collection"
+        redirect_to game_path(@game)
+      else
+        flash[:message] = "failed to add game to database"
+        render :new
+      end
+    end
+  end
+
   def show
     @game = Game.find_by(id: params[:id])
     redirect_to games_path if !@game #todo error
