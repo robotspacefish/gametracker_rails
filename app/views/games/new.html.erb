@@ -1,14 +1,13 @@
-<h1>Add Custom Game</h1>
+<h1>Create Game</h1>
+<p>If you can't find the game you're looking for, you can add it to the database here. Once it's created you can add it to your collection</p>
 
 <%= form_for(@game) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %><br>
 
-  <%= f.label :image, "Image URL" %>
-  <%= f.text_field :image %><br>
-
   <%= f.label :summary %>
   <%= f.text_area :summary %><br>
-
+  <%= f.collection_check_boxes(:platform_ids, Platform.all, :id, :name, checked: false) %>
+  <br>
   <%= f.submit "Add Game" %>
 <% end %>
