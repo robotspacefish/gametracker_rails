@@ -1,20 +1,36 @@
-<h1>Edit <%= @game.title %> Ownership</h1>
-
-<%= form_for(@owned_game, url: user_games_path(current_user)) do |f| %>
+<h1>Edit <%= @owned_game.game.title %> Ownership</h1>
+<%= form_with(model: @owned_game, url: owned_game_path(@owned_game)) do |f| %>
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
-
-  <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: current_user.owns_game_platform?(@game.id, p.id)) %>
-
   <br>
-  <%= f.label "Select Status" %><br>
-  <%= f.check_box :currently_playing %>
-  <%= f.label :currently_playing %>
+  <% @owned_game.game.platforms.each do |p| %>
+    <%= check_box_tag :platform_ids,p.name, current_user.owns_game_platform?(@owned_game.game.id, p.id)  %>
+    <label><%= p.name %></label>
+  <% end %>
+  <br><br>
+  <%= radio_button_tag status[:currently_playing], true, @owned_game.currently_playing %>
+  <%
+=begin%>
+ <%= f.radio_button  :currently_playing, true, options: {checked: @owned_game.currently_playing } %>
+  <label>Currently Playing</label>
+  <%= f.radio_button  :want_to_play, true, options: {checked: @owned_game.want_to_play } %>
+  <label>Want to Play</label>
+  <%= f.radio_button  :completed, true, options: {checked: @owned_game.completed } %>
+  <label>Completed</label>
+<%
+=end%>
+<%
+=begin%>
 
-  <%= f.check_box :want_to_play %>
-  <%= f.label :want_to_play %>
+  <input type="radio" id="currently_playing" name="owned_game[status]" value=@owned_game.currently_playing >
+  <label for="male">Currently Playing</label>
 
-  <%= f.check_box :completed %>
-  <%= f.label :completed %>
+  <input type="radio" id="want_to_play" name="owned_game[status]" value=@owned_game.want_to_play >
+  <label for="male">Want to Play</label>
 
-  <%= f.submit "Add to Collection" %>
+  <input type="radio" id="completed" name="owned_game[status]" value=@owned_game.completed >
+  <label for="male">Completed</label><br>
+<%
+=end%>
+  <br><br>
+  <%= f.submit "Update" %>
 <% end %>
