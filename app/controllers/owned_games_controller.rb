@@ -3,30 +3,30 @@ class OwnedGamesController < ApplicationController
 
   def new
     @game = Game.find_by(id: params[:game_id])
+
     if !@game
       flash[:message] = "Game does not exist"
       redirect_to games_path
+    end
+
+    if current_user.owns_game_by_instance?(@game)
+      flash[:message] = "You already own this game"
+      redirect_to game_path(@game)
     end
   end
 
   def create
     # todo require a platform select
-    if !current_user.owns_game_by_id?(params[:owned_game][:game_id])
-      success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
+    success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
 
-      if !success
-        flash[:message] = "Select at least 1 platform"
-        @game = Game.find_by(id: params[:owned_game][:game_id])
-        render :new
-        return
-      end
-
-      redirect_to user_games_path(current_user)
-
-    else
-      redirect_to games_path
+    if !success
+      flash[:message] = "Select at least 1 platform"
+      @game = Game.find_by(id: params[:owned_game][:game_id])
+      render :new
+      return
     end
 
+    redirect_to user_games_path(current_user)
   end
 
   def edit
