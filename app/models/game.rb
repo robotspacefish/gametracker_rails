@@ -23,4 +23,9 @@ class Game < ApplicationRecord
   def on_multiple_platforms?
     self.platforms.size > 1
   end
+
+  def get_added_by_username
+    user = User.find_by(id: self.added_by)
+    user ? user.username : nil
+  end
 end
