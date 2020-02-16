@@ -1,11 +1,12 @@
 <h1><%= @game.title %></h1>
+<h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
 <% if current_user.owns_game_by_instance?(@game) %>
-  <%= link_to "Edit Game Ownership", edit_owned_game_path(game_id: @game.id) %>
+  <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id) %>
 <% else %>
-  <%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: @game.id) %>
+  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id) %>
 <% end %>
 
-<%= link_to "Edit Game Info", edit_game_path(@game) if @game.custom %>
+<%= link_to "Edit Game Info", edit_game_path(@game) if current_user.added_game?(@game) %>
 
 <p><strong>Platforms:</strong></p>
 
@@ -20,7 +21,7 @@
 
   <hr>
 
-  <%= form_for(@owned_game, url: collection_remove_game_path(@game), method: 'delete') do |f| %>
+  <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
     <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
   <% end %>
 

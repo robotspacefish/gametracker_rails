@@ -2,7 +2,16 @@ class GamesController < ApplicationController
   before_action :redirect_if_not_logged_in
 
   def index
-    @games = Game.sort_by_title
+    if params[:user_id]
+      if is_current_user?(User.find_by(id: params[:user_id]))
+        @games = current_user.games
+      else
+        flash[:message] =  "Access denied."
+        redirect_to games_path
+      end
+    else
+      @games = Game.sort_by_title
+    end
   end
 
   def new
@@ -49,7 +58,10 @@ class GamesController < ApplicationController
 
   def edit
     @game = Game.find_by(id: params[:id])
-    redirect_to games_path if !@game || !@game.custom #todo error
+    if !@game || !current_user.added_game?(@game)
+      flash[:message] = "Access denied"
+      redirect_to game_path(@game)
+    end
   end
 
   def update

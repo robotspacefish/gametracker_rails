@@ -6,8 +6,6 @@
       <div>
         <%= link_to g.title, game_path(g) %>
         - <%= g.which_platforms?(current_user).join(' | ') %>
-        <br>
-        <%= image_tag(g.image, alt: g.title) if g.image %>
       </div>
       <br>
     <% end %>

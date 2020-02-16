@@ -60,4 +60,8 @@ class User < ApplicationRecord
     ogs = OwnedGamesPlatform.joins(:games_platform).where("user_id = ? AND game_id = ?", self.id, game.id)
     ogs.destroy_all
   end
+
+  def added_game?(game)
+    self.id == game.added_by
+  end
 end
