@@ -15,7 +15,7 @@
         <% end %>
 
       <% else %>
-        <%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: game.id) %>
+        <%= link_to "Add Game", add_to_collection_path(game.id) %>
       <% end %>
       <br>
       <%= image_tag(game.image, alt: game.title) if game.image %>

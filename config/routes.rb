@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   delete '/notes/:id', to: 'notes#destroy'
   resources :notes, only: [:edit, :update]
 
+  get '/games/:id/add_to_collection', to: 'owned_games#new', as: 'add_to_collection'
+
   resources :games do
     resources :notes, only: [:new, :create]
     # get '/collection/:id/edit', to: 'owned_games#edit', as: 'collection/edit_ownership'
@@ -25,8 +27,6 @@ Rails.application.routes.draw do
   resources :users do
     # resources :owned_games, only: [:index, :create], as: 'collection'
     resources :games, only: [:index]
-    get '/collection/add_game', to: 'owned_games#new'
-    post '/collection', to: 'owned_games#create'
 
     get '/account', to: 'users#edit'
   end

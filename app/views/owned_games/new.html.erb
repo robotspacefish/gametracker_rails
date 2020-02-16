@@ -1,7 +1,7 @@
 <h1>Add <%= @game.title %></h1>
 <p><%= @game.summary %></p>
 
-<%= form_for(:owned_game, url: user_games_path) do |f| %>
+<%= form_for(:owned_game, url: user_games_path(current_user)) do |f| %>
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
   <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: false) %>
   <br><br>
