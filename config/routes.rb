@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   delete '/notes/:id', to: 'notes#destroy'
   resources :notes, only: [:edit, :update]
 
-  get '/games/:id/add_to_collection', to: 'owned_games#new', as: 'add_to_collection'
+  # get '/games/:id/add_to_collection', to: 'owned_games#new', as: 'add_to_collection'
+  # post '/owned_games', to: 'owned_games#create'
 
   resources :games do
+    resources :owned_games, only: [:new, :create]
     resources :notes, only: [:new, :create]
     # get '/collection/:id/edit', to: 'owned_games#edit', as: 'collection/edit_ownership'
     # resources :owned_games_platforms, only: :edit
