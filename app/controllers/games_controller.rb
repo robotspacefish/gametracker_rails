@@ -58,7 +58,10 @@ class GamesController < ApplicationController
 
   def edit
     @game = Game.find_by(id: params[:id])
-    redirect_to games_path if !@game || !@game.custom #todo error
+    if !@game || @game.added_by != current_user.id
+      flash[:message] = "Access denied"
+      redirect_to game_path(@game)
+    end
   end
 
   def update
