@@ -31,7 +31,7 @@ class OwnedGamesController < ApplicationController
         return
       end
 
-      redirect_to user_collection_path(current_user)
+      redirect_to user_games_path(current_user)
 
     else
       redirect_to games_path
@@ -53,7 +53,7 @@ class OwnedGamesController < ApplicationController
       current_user.delete_from_collection(@game)
     end
 
-    redirect_to user_collection_path(current_user)
+    redirect_to user_games_path(current_user)
   end
 
   private

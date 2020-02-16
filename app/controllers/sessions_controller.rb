@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
-      redirect_to user_collection_path(user)
+      redirect_to user_games_path(user)
     else
       flash[:message] = "Incorrect login information. Please try again"
       redirect_to login_path

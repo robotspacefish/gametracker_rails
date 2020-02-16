@@ -18,7 +18,7 @@
         </div>
         <div>
           <%= link_to "#{current_user.username} Home", user_path(current_user) %> |
-          <%= link_to "My Collection", user_collection_path(current_user) %> |
+          <%= link_to "My Collection", user_games_path(current_user) %> |
           <%= link_to "My Account", user_account_path(current_user) %> |
           <%= link_to "Log Out", logout_path, method: 'delete' %>
         </div>

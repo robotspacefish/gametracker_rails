@@ -1,6 +1,6 @@
 <h1>Edit <%= @game.title %> Ownership</h1>
 
-<%= form_for(@owned_game, url: user_collection_path(current_user)) do |f| %>
+<%= form_for(@owned_game, url: user_games_path(current_user)) do |f| %>
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
 
   <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: current_user.owns_game_platform?(@game.id, p.id)) %>

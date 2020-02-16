@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_collection_path(@user) #todo change
+      redirect_to user_games_path(@user) #todo change
     else
       render :new
     end
