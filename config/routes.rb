@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :users do
     # resources :owned_games, only: [:index, :create], as: 'collection'
-    get '/collection', to: 'owned_games#index'
+    resources :games, only: [:index]
     get '/collection/add_game', to: 'owned_games#new'
     post '/collection', to: 'owned_games#create'
 
