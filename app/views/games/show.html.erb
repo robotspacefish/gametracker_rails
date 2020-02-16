@@ -1,5 +1,9 @@
 <h1><%= @game.title %></h1>
-<%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: @game.id) %>
+<% if current_user.owns_game_by_instance?(@game) %>
+  <%= link_to "Edit Game Ownership", edit_owned_game_path(game_id: @game.id) %>
+<% else %>
+  <%= link_to "Add Game", user_collection_add_game_path(user_id: current_user, game_id: @game.id) %>
+<% end %>
 
 <%= link_to "Edit Game Info", edit_game_path(@game) if @game.custom %>
 
