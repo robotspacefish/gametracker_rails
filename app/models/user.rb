@@ -64,4 +64,8 @@ class User < ApplicationRecord
   def added_game?(game)
     self.id == game.added_by
   end
+
+  def get_avatar_url
+    "https://robohash.org/#{self.username}"
+  end
 end
