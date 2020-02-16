@@ -21,6 +21,8 @@
           <%= link_to "Create Game", new_game_path %>
         </div>
         <div>
+          <%= display_avatar(current_user) %>
+
           <%= link_to "#{current_user.username} Home", user_path(current_user) %> |
           <%= link_to "My Collection", user_games_path(current_user) %> |
           <%= link_to "My Account", user_account_path(current_user) %> |
