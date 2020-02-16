@@ -12,28 +12,18 @@ Rails.application.routes.draw do
   delete '/notes/:id', to: 'notes#destroy'
   resources :notes, only: [:edit, :update]
 
-  # get '/games/:id/add_to_collection', to: 'owned_games#new', as: 'add_to_collection'
-  # post '/owned_games', to: 'owned_games#create'
-
   resources :games do
     resources :owned_games, only: [:new, :create]
     resources :notes, only: [:new, :create]
-    # get '/collection/:id/edit', to: 'owned_games#edit', as: 'collection/edit_ownership'
-    # resources :owned_games_platforms, only: :edit
   end
 
   resources :owned_games, except: [:index, :show, :new, :create]
 
-
   resources :users do
-    # resources :owned_games, only: [:index, :create], as: 'collection'
     resources :games, only: [:index]
 
     get '/account', to: 'users#edit'
   end
-
-  # patch '/collection/:id', to: 'owned_games#update'
-  # delete '/collection/:id', to: 'owned_games#destroy', as: 'collection/remove_game'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
