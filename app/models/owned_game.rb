@@ -38,8 +38,4 @@ class OwnedGame < ApplicationRecord
 
     owned_games.all?
   end
-
-  # def destroy_notes(game)
-  #   self.notes.destroy_all
-  # end
 end

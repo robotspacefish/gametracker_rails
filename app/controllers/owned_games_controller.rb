@@ -39,6 +39,14 @@ class OwnedGamesController < ApplicationController
 
   end
 
+  def edit
+    @game = Game.find_by(id: params[:game_id])
+    @owned_game = OwnedGame.find_by(user_id: current_user.id, game_id: @game.id)
+  end
+
+  def update
+  end
+
   def destroy
     @game = Game.find_by(id: params[:id])
     if @game && current_user.owns_game_by_instance?(@game)

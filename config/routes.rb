@@ -14,8 +14,12 @@ Rails.application.routes.draw do
 
   resources :games do
     resources :notes, only: [:new, :create]
+    # get '/collection/:id/edit', to: 'owned_games#edit', as: 'collection/edit_ownership'
+    # resources :owned_games_platforms, only: :edit
   end
 
+  # resources :owned_games_platforms, only: [:edit, :update]
+  resources :owned_games, only: [:edit, :update]
 
 
   resources :users do
@@ -23,9 +27,11 @@ Rails.application.routes.draw do
     get '/collection', to: 'owned_games#index'
     get '/collection/add_game', to: 'owned_games#new'
     post '/collection', to: 'owned_games#create'
+
     get '/account', to: 'users#edit'
   end
 
+  patch '/collection/:id', to: 'owned_games#update'
   delete '/collection/:id', to: 'owned_games#destroy', as: 'collection/remove_game'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
