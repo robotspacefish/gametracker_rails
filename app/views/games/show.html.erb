@@ -1,4 +1,5 @@
 <h1><%= @game.title %></h1>
+<h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
 <% if current_user.owns_game_by_instance?(@game) %>
   <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id) %>
 <% else %>
