@@ -13,14 +13,15 @@ class OwnedGamesController < ApplicationController
   end
 
   def new
-    @game = Game.find_by(id: params[:id])
-    redirect_to games_path if !@game
+    @game = Game.find_by(id: params[:game_id])
+    if !@game
+      flash[:message] = "Game does not exist"
+      redirect_to games_path
+    end
   end
 
   def create
     # todo require a platform select
-    end
-
     if !current_user.owns_game_by_id?(params[:owned_game][:game_id])
       success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
 
