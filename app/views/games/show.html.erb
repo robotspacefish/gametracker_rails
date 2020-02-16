@@ -2,7 +2,7 @@
 <% if current_user.owns_game_by_instance?(@game) %>
   <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id) %>
 <% else %>
-  <%= link_to "Add Game", new_game_owned_game_path(@game.id) %>
+  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id) %>
 <% end %>
 
 <%= link_to "Edit Game Info", edit_game_path(@game) if current_user.added_game?(@game) %>
