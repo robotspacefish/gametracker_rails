@@ -14,14 +14,14 @@ summary = <<-SUMMARY
   Nullam quis risus eget urna mollis ornare vel eu leo. Aenean lacinia bibendum nulla sed consectetur. Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.
 SUMMARY
 
-g1 = Game.create(title: "Hollow Knight", custom: true, summary: summary, image: "https://via.placeholder.com/264x374", added_by: 1 )
-g2 = Game.create(title: "Mass Effect", custom: true, summary: summary, image: "https://via.placeholder.com/264x374", added_by: 1 )
-g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary, image: "https://via.placeholder.com/264x374", added_by:1 )
-g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary, image: "https://via.placeholder.com/264x374", added_by: 3 )
-g5 = Game.create(title: "Gears of War", custom: true, image: "https://via.placeholder.com/264x374", added_by: 1 )
-g6 = Game.create(title: "The Last of Us", image: "https://via.placeholder.com/264x374", added_by: 2 )
-g7 = Game.create(title: "Dragon Quest Builders", custom: true, image: "https://via.placeholder.com/264x374", added_by: 3 )
-g8 = Game.create(title: "Dragon Quest Builders 2", custom: true, image: "https://via.placeholder.com/264x374", added_by:2 )
+g1 = Game.create(title: "Hollow Knight", custom: true, summary: summary, added_by: 1 )
+g2 = Game.create(title: "Mass Effect", custom: true, summary: summary, added_by: 1 )
+g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary, added_by:1 )
+g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary, added_by: 3 )
+g5 = Game.create(title: "Gears of War", custom: true, added_by: 1 )
+g6 = Game.create(title: "The Last of Us", added_by: 2 )
+g7 = Game.create(title: "Dragon Quest Builders", custom: true, added_by: 3 )
+g8 = Game.create(title: "Dragon Quest Builders 2", custom: true, added_by:2 )
 
 
 p1 = Platform.create(name: "Xbox One")

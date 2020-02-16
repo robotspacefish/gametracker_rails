@@ -4,7 +4,6 @@
 <% @user.games.recently_added.each do |game| %>
   <div>
     <%= game.title %><br>
-    <%= image_tag(game.image, alt: game.title) if game.image %>
   </div>
 <% end %>
 
@@ -14,7 +13,6 @@
 <% @user.currently_playing.each do |game| %>
   <div>
     <%= game.title %><br>
-    <%= image_tag(game.image, alt: game.title) if game.image %>
   </div>
   <br>
 <% end %>

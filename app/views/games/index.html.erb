@@ -17,8 +17,6 @@
       <% else %>
         <%= link_to "Add Game", new_game_owned_game_path(game.id) %>
       <% end %>
-      <br>
-      <%= image_tag(game.image, alt: game.title) if game.image %>
     </div>
     <br>
   <% end %>
