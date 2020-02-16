@@ -30,11 +30,11 @@ class OwnedGamesController < ApplicationController
   end
 
   def edit
-    @game = Game.find_by(id: params[:game_id])
-    @owned_game = OwnedGame.find_by(user_id: current_user.id, game_id: @game.id)
+    @owned_game = OwnedGame.find_by(user_id: current_user.id, game_id: params[:id])
   end
 
   def update
+    binding.pry
   end
 
   def destroy
@@ -48,6 +48,6 @@ class OwnedGamesController < ApplicationController
 
   private
     def owned_game_params
-      params.require(:owned_game).permit(:currently_playing, :want_to_play, :completed, :game_id, :platform_ids => [])
+      params.require(:owned_game).permit(:currently_playing, :want_to_play, :completed, :game_id, platform_ids: [])
     end
 end
