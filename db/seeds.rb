@@ -25,6 +25,16 @@ p2 = Platform.create(name: "Nintendo Switch")
 p3 = Platform.create(name: "PlayStation 4")
 p4 = Platform.create(name: "PC")
 
+Platform.create(name: "Nintendo 3DS")
+Platform.create(name: "Xbox 360")
+Platform.create(name: "Xbox")
+Platform.create(name: "PlayStation 3")
+Platform.create(name: "PlayStation 2")
+Platform.create(name: "PlayStation 1")
+Platform.create(name: "PlayStation Vita")
+Platform.create(name: "Mobile")
+Platform.create(name: "Web Browser")
+
 g1.platforms << p1 << p2 << p3 << p4
 g2.platforms << p4
 g3.platforms << p4
