@@ -1,4 +1,6 @@
 class Note < ApplicationRecord
+  validates :title, presence: true
+
   belongs_to :owned_game
 
   scope :sort_newest_first, -> { order(created_at: :desc)}
