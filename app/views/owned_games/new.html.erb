@@ -20,5 +20,8 @@
 
   <%= f.hidden_field :game_id, value: @game.id %>
 
-  <%= f.submit "Add to Collection", class: submit_button_classes %>
+  <div class="row">
+    <%= f.submit "Add to Collection", class: submit_button_classes %>
+    <%= link_to "Cancel", games_path, class: "btn btn-danger mt-4 ml-2" %>
+  </div>
 <% end %>
