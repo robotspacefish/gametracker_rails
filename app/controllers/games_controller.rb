@@ -32,15 +32,7 @@ class GamesController < ApplicationController
       @game.custom = true
 
       if @game.save!
-        # add to user's collection
-        current_user.games << @game
-
-        @game.platforms.each do |p|
-          current_user.add_games_platform_by_game_and_platform(@game, p)
-        end
-
-        flash[:message] = "Successfully added #{@game.title} to your collection"
-        redirect_to game_path(@game)
+        redirect_to new_game_owned_game_path(@game)
       else
         flash[:message] = "failed to add game to database"
         render :new
