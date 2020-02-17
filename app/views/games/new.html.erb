@@ -17,9 +17,11 @@
   <div class="form-row align-items-center">
     <div class="form-group col-md-6">
       <%= f.label :platform_ids, "Select Platform(s)" %>
-      <%= select_tag :platform_ids, options_for_select(Platform.all.collect { |p| p.name }), multiple: true, class: "form-control" %>
+      <%= f.collection_select :platform_ids, Platform.all, :id, :name, {}, {class: "form-control", multiple: true } %>
     </div>
   </div>
+
+
 
 
   <%= f.submit "Add Game" %>
