@@ -1,18 +1,7 @@
 <%= display_title("#{@user.username}'s Home") %>
 
-<h2>Recently Added</h2>
-<% @user.games.recently_added.each do |game| %>
-  <div>
-    <%= game.title %><br>
-  </div>
-<% end %>
+<div class="row">
+  <%= render partial: 'list_group_card', locals: {games: @user.games.recently_added, header_text: "Recently Added"} %>
+  <%= render partial: 'list_group_card', locals: {games: @user.currently_playing, header_text: "Currently Playing"} %>
+</div>
 
-
-<h2>Currently Playing</h2>
-
-<% @user.currently_playing.each do |game| %>
-  <div>
-    <%= game.title %><br>
-  </div>
-  <br>
-<% end %>
