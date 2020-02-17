@@ -34,10 +34,10 @@
 
 <p><%= @game.summary %></p>
 
-<hr>
+<hr class="my-4">
 
 <% if @owned_game %>
-  <div class="row d-flex justify-content-end mr-1">
+  <div class="row d-flex justify-content-end mr-1 mb-3">
     <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
       <%= f.submit "Delete Game From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
     <% end %>
