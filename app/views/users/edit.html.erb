@@ -13,5 +13,5 @@
 <% end %>
 
 <%= form_for(@user, method: 'delete') do |f| %>
-  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'} %>
+  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'}, class: "btn btn-danger" %>
 <% end %>
