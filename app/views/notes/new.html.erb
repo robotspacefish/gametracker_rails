@@ -1,4 +1,4 @@
-<h1 class="display-4 text-center mt-4">Create Note For <%= @game.title %></h1>
+<%= display_title("Create Note For #{@game.title}") %>
 
 <%= form_for([@game, @note]) do |f| %>
   <%= render partial: 'form', locals: {f: f} %>

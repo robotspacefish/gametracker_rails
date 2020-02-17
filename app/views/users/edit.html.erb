@@ -1,4 +1,4 @@
-<h1><%= @user.username %>'s Account</h1>
+<%= display_title("#{@user.username}'s Account") %>
 
 <%= form_for(@user) do |f| %>
   <%= f.label :username, "Update Username" %>

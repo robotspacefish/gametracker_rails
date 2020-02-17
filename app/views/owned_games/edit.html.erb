@@ -1,4 +1,5 @@
-<h1>Edit <%= @owned_game.game.title %> Ownership</h1>
+<%= display_title("Edit #{@owned_game.game.title} Ownership") %>
+
 <%= form_with(model: @owned_game, url: owned_game_path(@owned_game)) do |f| %>
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
   <br>

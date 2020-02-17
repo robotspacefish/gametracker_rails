@@ -1,4 +1,4 @@
-<h1><%= @user.username %>'s Home Page</h1>
+<%= display_title("#{@user.username}'s Home") %>
 
 <h2>Recently Added</h2>
 <% @user.games.recently_added.each do |game| %>
