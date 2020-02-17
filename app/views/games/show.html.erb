@@ -32,7 +32,10 @@
   <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
 <% end %>
 
-<p><%= @game.summary %></p>
+<div class="my-4">
+  <h3 class="display-6">Summary:</h3>
+  <p><%= @game.summary %></p>
+</div>
 
 <hr class="my-4">
 
