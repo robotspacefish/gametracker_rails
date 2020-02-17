@@ -5,7 +5,7 @@
 <% else %>
   <div class="row">
     <%= render partial: 'list_group_card', locals: {games: @user.games.recently_added, header_text: "Recently Added"} %>
-    <%= render partial: 'list_group_card', locals: {games: @user.currently_playing, header_text: "Currently Playing"} %>
+    <%= render partial: 'list_group_card', locals: {games: @user.currently_playing.sort_by_title, header_text: "Currently Playing"} %>
   </div>
 <% end %>
 
