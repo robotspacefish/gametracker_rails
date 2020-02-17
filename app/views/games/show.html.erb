@@ -32,21 +32,15 @@
   <% end %>
 </h6>
 
-<% if current_user.owns_game_by_instance?(@game) %>
-  <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary btn-sm" %>
-<% else %>
-  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
-<% end %>
-
 <div class="my-4">
   <h3 class="display-6">Summary:</h3>
   <p><%= @game.summary %></p>
 </div>
 
 <hr class="my-4">
-
 <% if @owned_game %>
   <div class="row d-flex justify-content-end mr-1 mb-3">
+    <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary mr-3" %>
     <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
       <%= f.submit "Delete Game From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
     <% end %>
