@@ -30,9 +30,6 @@
           <%= link_to "My Collection", user_games_path(current_user), class: "nav-item nav-link" %>
           <%= link_to "Account", user_account_path(current_user), class: "nav-item nav-link" %>
           <%= link_to "Log Out", logout_path, method: 'delete', class: "nav-item nav-link" %>
-        <% else %>
-          <%= link_to "Login", login_path, class: "nav-item nav-link" %>
-          <%= link_to "Sign Up", signup_path, class: "nav-item nav-link" %>
         <% end %>
       </div>
     </nav>
