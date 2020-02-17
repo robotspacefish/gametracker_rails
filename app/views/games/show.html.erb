@@ -1,4 +1,10 @@
 <div class="row d.flex justify-content-end mt-3 mr-1">
+  <% if !@owned_game %>
+    <div class="col-auto justify-self-center">
+      <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
+    </div>
+  <% end %>
+
   <span class="text-muted font-weight-light">
     <% if current_user.added_game?(@game) %>
       <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" %>
