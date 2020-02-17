@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   def index
     if params[:user_id]
       if is_current_user?(User.find_by(id: params[:user_id]))
-        @games = current_user.games
+        @games = current_user.games.sort_by_title
       else
         flash[:message] =  "Access denied."
         redirect_to games_path
