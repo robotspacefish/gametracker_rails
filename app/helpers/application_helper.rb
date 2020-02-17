@@ -7,4 +7,8 @@ module ApplicationHelper
   def display_title(content)
     content_tag(:h1, content, class: "display-4 text-center mt-4")
   end
+
+  def submit_button_classes
+    "btn btn-outline-dark mt-4"
+  end
 end

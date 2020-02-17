@@ -19,5 +19,6 @@
   </div>
 
   <%= f.hidden_field :game_id, value: @game.id %>
-  <%= f.submit "Add to Collection" %>
+
+  <%= f.submit "Add to Collection", class: submit_button_classes %>
 <% end %>
