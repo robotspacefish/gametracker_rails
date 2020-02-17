@@ -2,12 +2,25 @@
 <p>If you can't find the game you're looking for, you can add it to the database here. Once it's created you can add it to your collection</p>
 
 <%= form_for(@game) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %><br>
+  <div class="form-row align-items-center">
+    <div class="form-group col-md-6">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-row align-items-center">
+    <div class="form-group col-md-6">
+      <%= f.label :summary %>
+      <%= f.text_area :summary, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-row align-items-center">
+    <div class="form-group col-md-6">
+      <%= f.label :platform_ids, "Select Platform(s)" %>
+      <%= select_tag :platform_ids, options_for_select(Platform.all.collect { |p| p.name }), multiple: true, class: "form-control" %>
+    </div>
+  </div>
 
-  <%= f.label :summary %>
-  <%= f.text_area :summary %><br>
-  <%= f.collection_check_boxes(:platform_ids, Platform.all, :id, :name, checked: false) %>
-  <br>
+
   <%= f.submit "Add Game" %>
 <% end %>
