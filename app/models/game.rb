@@ -7,7 +7,7 @@ class Game < ApplicationRecord
   has_many :owned_games
   has_many :users, through: :owned_games
 
-  scope :sort_by_title, -> { order(:title) }
+  scope :sort_by_title, -> { order("lower(title)") }
   scope :last_added, -> { order(created_at: :desc).limit(1) }
   scope :recently_added, -> { order(created_at: :desc).limit(3).distinct }
   scope :total_by_title, -> { count }
