@@ -1,12 +1,12 @@
 <h1><%= @game.title %></h1>
 <h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
 <% if current_user.owns_game_by_instance?(@game) %>
-  <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id) %>
+  <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary btn-sm" %>
 <% else %>
-  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id) %>
+  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
 <% end %>
 
-<%= link_to "Edit Game Info", edit_game_path(@game) if current_user.added_game?(@game) %>
+<%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" if current_user.added_game?(@game) %>
 
 <p><strong>Platforms:</strong></p>
 
@@ -15,18 +15,18 @@
 <% end %>
 
 <p><%= @game.summary %></p>
-
+  <hr>
 <% if @owned_game %>
   <h3>You own this game on <%= owned_platforms_as_string(current_user, @game) %> </h3>
 
-  <hr>
+
 
   <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
-    <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
+    <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
   <% end %>
 
   <h3>Notes/Objectives</h3>
-  <%= link_to "Add Note", new_game_note_path(@game) %>
+  <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
   <br>
 
   <% @owned_game.notes.sort_newest_first.each do |note| %>
@@ -39,8 +39,8 @@
       <% end %>
 
       <p><%= note.content %></p>
-      <%= link_to "Edit Note", edit_note_path(note) %>
-      <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."} %>
+      <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm" %>
+      <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
     </div>
   <% end %>
 
