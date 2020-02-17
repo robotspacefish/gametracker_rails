@@ -39,7 +39,6 @@ class NotesController < ApplicationController
       @note.destroy
       redirect_to game_path(@note.game)
     else
-      #todo change redirect path
       flash[:message] = "Note not found."
       redirect_to games_path
     end
