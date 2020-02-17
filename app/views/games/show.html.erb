@@ -5,10 +5,8 @@
     </div>
   </div>
 <% end %>
-
-<h1><%= @game.title %></h1>
-<h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
-<h6>
+<h1 class="display-1 text-center"><%= @game.title %></h1>
+<h6 class="text-center">
   <% @game.platforms.each do |p| %>
     <span class=<%= current_user.owns_game_platform?(@game.id, p.id) ? "text-dark" : "font-weight-light text-muted"  %>>
       <%= p.name %>
