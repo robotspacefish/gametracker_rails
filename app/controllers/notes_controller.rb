@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :find_game_by_game_id, only: [:new, :create]
   before_action :owned_game, only: [:new, :create]
+  before_action :find_note, only: [:edit, :update, :destroy]
 
   def new
     if @owned_game
@@ -22,11 +23,9 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @note = Note.find_by(id: params[:id])
   end
 
   def update
-    @note = Note.find_by(id: params[:id])
     @note.update(note_params)
     if @note.save
       redirect_to game_path(@note.game)
@@ -36,7 +35,6 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note = Note.find_by(id: params[:id])
     if @note && @note.belongs_to_user?(current_user)
       @note.destroy
       redirect_to game_path(@note.game)
@@ -58,5 +56,9 @@ class NotesController < ApplicationController
 
     def owned_game
       @owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
+    end
+
+    def find_note
+      @note = Note.find_by(id: params[:id])
     end
 end
