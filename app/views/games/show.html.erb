@@ -1,3 +1,9 @@
+<div class="row d.flex justify-content-end mt-3 mr-1">
+  <span class="text-muted font-weight-light">
+    <%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %>
+  </span>
+</div>
+
 <% if @owned_game %>
   <div class="row m-4">
     <div class="col-auto">
