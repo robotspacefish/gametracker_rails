@@ -29,18 +29,22 @@
   <br>
 
   <% @owned_game.notes.sort_newest_first.each do |note| %>
-    <hr>
-    <div>
-      <p><%= note.title %></p>
-      <%= human_readable_datetime(note.created_at) %>
-      <% if note.completed %>
-        <p><strong>Objective Completed</strong></p>
-      <% end %>
-
-      <p><%= note.content %></p>
-      <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm" %>
-      <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+    <div class="card my-4">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= note.title %>
+          <% if note.completed %>
+            - <strong>Objective Completed</strong>
+          <% end %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= human_readable_datetime(note.created_at) %></h6>
+        <p class="card-text"><%= note.content %></p>
+        <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm" %>
+        <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+      </div>
     </div>
+    <div>
+
   <% end %>
 
 <% end %>
