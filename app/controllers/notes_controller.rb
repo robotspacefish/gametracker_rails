@@ -1,9 +1,8 @@
 class NotesController < ApplicationController
   before_action :redirect_if_not_logged_in
+  before_action :find_game_by_game_id, only: [:new, :create]
 
   def new
-    # find owned game by game_id
-    @game = Game.find(params[:game_id])
     if owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
       @note = Note.new
     else
@@ -13,13 +12,10 @@ class NotesController < ApplicationController
   end
 
   def create
-    game = Game.find_by(id: params[:game_id])
-
-    @owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
-      @note = @owned_game.notes.build(note_params)
-
+    owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
+      @note = owned_game.notes.build(note_params)
     if @note.save
-      redirect_to game_path(game)
+      redirect_to game_path(@game)
     else
       render :new
     end
@@ -54,6 +50,10 @@ class NotesController < ApplicationController
   private
     def note_params
       params.require(:note).permit(:title, :content, :completed)
+    end
+
+    def find_game_by_game_id
+      @game = Game.find(params[:game_id])
     end
 
 end
