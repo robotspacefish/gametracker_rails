@@ -1,28 +1,4 @@
 <h1>Create Game</h1>
 <p>If you can't find the game you're looking for, you can add it to the database here. Once it's created you can add it to your collection</p>
 
-<%= form_for(@game) do |f| %>
-  <div class="form-row align-items-center">
-    <div class="form-group col-md-6">
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-row align-items-center">
-    <div class="form-group col-md-6">
-      <%= f.label :summary %>
-      <%= f.text_area :summary, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-row align-items-center">
-    <div class="form-group col-md-6">
-      <%= f.label :platform_ids, "Select Platform(s)" %>
-      <%= f.collection_select :platform_ids, Platform.all, :id, :name, {}, {class: "form-control", multiple: true } %>
-    </div>
-  </div>
-
-
-
-
-  <%= f.submit "Add Game", class: "btn btn-outline-dark"%>
-<% end %>
+<%= render 'form' %>

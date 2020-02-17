@@ -1,12 +1,3 @@
 <h1>Edit <%= @game.title %></h1>
 
-<%= form_for(@game) do |f| %>
-  <% if !@game.is_owned? %>
-    <%= f.label :title %>
-    <%= f.text_field :title %><br>
-  <% end %>
-
-  <%= f.label :summary %><br>
-  <%= f.text_area :summary %><br>
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
