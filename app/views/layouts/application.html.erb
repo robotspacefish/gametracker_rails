@@ -25,7 +25,7 @@
       <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
         <% if logged_in? %>
           <%= link_to "Games", games_path, class: "nav-item nav-link" %>
-          <%= link_to "Add Game", new_game_path, class: "nav-item nav-link" %>
+          <%= link_to "Add New Game", new_game_path, class: "nav-item nav-link" %>
           <%= link_to "#{current_user.username} Home", user_path(current_user), class: "nav-item nav-link" %>
           <%= link_to "My Collection", user_games_path(current_user), class: "nav-item nav-link" %>
           <%= link_to "Account", user_account_path(current_user), class: "nav-item nav-link" %>
