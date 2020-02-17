@@ -1,9 +1,10 @@
 class NotesController < ApplicationController
   before_action :redirect_if_not_logged_in
   before_action :find_game_by_game_id, only: [:new, :create]
+  before_action :owned_game, only: [:new, :create]
 
   def new
-    if owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
+    if @owned_game
       @note = Note.new
     else
       flash[:message] = "You need to add the game to your collection before you can add a note"
@@ -12,8 +13,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
-      @note = owned_game.notes.build(note_params)
+      @note = @owned_game.notes.build(note_params)
     if @note.save
       redirect_to game_path(@game)
     else
@@ -56,4 +56,7 @@ class NotesController < ApplicationController
       @game = Game.find(params[:game_id])
     end
 
+    def owned_game
+      @owned_game = current_user.find_owned_game_by_game_id(params[:game_id])
+    end
 end
