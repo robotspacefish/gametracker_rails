@@ -8,6 +8,13 @@
 
 <h1><%= @game.title %></h1>
 <h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
+<h6>
+  <% @game.platforms.each do |p| %>
+    <span class=<%= current_user.owns_game_platform?(@game.id, p.id) ? "text-dark" : "font-weight-light text-muted"  %>>
+      <%= p.name %>
+    </span>
+  <% end %>
+</h6>
 <% if current_user.owns_game_by_instance?(@game) %>
   <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary btn-sm" %>
 <% else %>
@@ -15,12 +22,6 @@
 <% end %>
 
 <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" if current_user.added_game?(@game) %>
-
-<p><strong>Platforms:</strong></p>
-
-<% @game.platforms.each do |p| %>
-  <%= p.name %>
-<% end %>
 
 <p><%= @game.summary %></p>
   <hr>
