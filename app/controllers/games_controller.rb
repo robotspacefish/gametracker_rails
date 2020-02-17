@@ -19,7 +19,10 @@ class GamesController < ApplicationController
   end
 
   def create
-    if @game = Game.where("LOWER(title) LIKE ?", params[:game][:title]).take
+    if params[:game][:platform_ids].filter { |p| !p.blank? }.empty?
+      flash[:message] = "You must select at least 1 platform."
+      render :new
+    elsif @game = Game.where("LOWER(title) LIKE ?", params[:game][:title]).take
       if current_user.owns_game_by_instance?(@game)
         flash[:message] = "You already own #{@game.title}."
       else
