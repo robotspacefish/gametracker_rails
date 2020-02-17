@@ -1,6 +1,10 @@
 <div class="row d.flex justify-content-end mt-3 mr-1">
   <span class="text-muted font-weight-light">
-    <%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %>
+    <% if current_user.added_game?(@game) %>
+      <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" %>
+    <% elsif @game.added_by %>
+      <%= "[Added by #{@game.get_added_by_username}]" %>
+    <% end %>
   </span>
 </div>
 
@@ -11,7 +15,9 @@
     </div>
   </div>
 <% end %>
+
 <h1 class="display-1 text-center"><%= @game.title %></h1>
+
 <h6 class="text-center">
   <% @game.platforms.each do |p| %>
     <span class=<%= current_user.owns_game_platform?(@game.id, p.id) ? "text-dark" : "font-weight-light text-muted"  %>>
@@ -19,16 +25,17 @@
     </span>
   <% end %>
 </h6>
+
 <% if current_user.owns_game_by_instance?(@game) %>
   <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary btn-sm" %>
 <% else %>
   <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
 <% end %>
 
-<%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" if current_user.added_game?(@game) %>
-
 <p><%= @game.summary %></p>
-  <hr>
+
+<hr>
+
 <% if @owned_game %>
   <div class="row d-flex justify-content-end mr-1">
     <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
@@ -37,6 +44,7 @@
   </div>
 
   <h3 class="display-4 text-center">Notes/Objectives</h3>
+
   <div class="row d-flex justify-content-end mr-1">
     <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
   </div>
@@ -66,7 +74,6 @@
       </div>
     </div>
     <div>
-
   <% end %>
 
 <% end %>
