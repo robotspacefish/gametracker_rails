@@ -1,7 +1,11 @@
 <%= display_title("#{@user.username}'s Home") %>
 
-<div class="row">
-  <%= render partial: 'list_group_card', locals: {games: @user.games.recently_added, header_text: "Recently Added"} %>
-  <%= render partial: 'list_group_card', locals: {games: @user.currently_playing, header_text: "Currently Playing"} %>
-</div>
+<% if @user.games.empty? %>
+  <h2 class="text-center font-weight-light">You have no games in your collection! :(</h2>
+<% else %>
+  <div class="row">
+    <%= render partial: 'list_group_card', locals: {games: @user.games.recently_added, header_text: "Recently Added"} %>
+    <%= render partial: 'list_group_card', locals: {games: @user.currently_playing, header_text: "Currently Playing"} %>
+  </div>
+<% end %>
 
