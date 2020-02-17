@@ -24,20 +24,33 @@
     <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
   <% end %>
 
-  <h3>Notes/Objectives</h3>
-  <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
-  <br>
+  <h3 class="display-4 text-center">Notes/Objectives</h3>
+  <div class="row d-flex justify-content-end mr-1">
+    <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
+  </div>
 
   <% @owned_game.notes.sort_newest_first.each do |note| %>
     <div class="card my-4">
       <div class="card-body">
-        <h5 class="card-title <%='strikethrough' if note.completed %>" >
-          <%= note.title %>
-        </h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= human_readable_datetime(note.created_at) %></h6>
+        <div class="row">
+          <div class="col-sm-9">
+            <h5 class="card-title <%='strikethrough' if note.completed %>" >
+              <%= note.title %>
+            </h5>
+          </div>
+          <div class="col-sm-3">
+            <h6 class="card-subtitle mb-2 text-muted"><%= human_readable_datetime(note.created_at) %></h6>
+          </div>
+        </div>
         <p class="card-text"><%= note.content %></p>
-        <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm" %>
-        <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+        <div class="row justify-content-end">
+          <div class="d-inline-flex col-auto mr-3">
+            <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm mr-2" %>
+
+
+            <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+          </div>
+        </div>
       </div>
     </div>
     <div>
