@@ -16,6 +16,10 @@ class Game < ApplicationRecord
     !self.users.empty?
   end
 
+  def is_only_owned_by_user?(user)
+    self.users.size == 1 && self.users.find_by(id: user.id)
+  end
+
   def which_platforms?(user)
     user.games_platforms.where(game_id: self.id).joins(:platform).pluck(:name)
   end
