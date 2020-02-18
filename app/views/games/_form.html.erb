@@ -12,7 +12,7 @@
   <div class="form-row align-items-center">
     <div class="form-group col-md-6">
       <%= f.label :summary, class: "col-form-label" %>
-      <%= f.text_area :summary, class: "form-control" %>
+        <%= f.collection_select :platform_ids, Platform.all.sort_by_name, :id, :name, {}, {class: "form-control", multiple: true } %>
     </div>
   </div>
   <div class="form-row align-items-center">
