@@ -14,14 +14,14 @@ summary = <<-SUMMARY
   Nullam quis risus eget urna mollis ornare vel eu leo. Aenean lacinia bibendum nulla sed consectetur. Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.
 SUMMARY
 
-g1 = Game.create(title: "Hollow Knight", custom: true, summary: summary, added_by: 1 )
-g2 = Game.create(title: "Mass Effect", custom: true, summary: summary, added_by: 1 )
-g3 = Game.create(title: "Fallout: New Vegas", custom: true, summary: summary, added_by:1 )
-g4 = Game.create(title: "The Legend of Zelda", custom: true, summary: summary, added_by: 3 )
-g5 = Game.create(title: "Gears of War", custom: true, added_by: 1 )
+g1 = Game.create(title: "Hollow Knight", summary: summary, added_by: 1 )
+g2 = Game.create(title: "Mass Effect", summary: summary, added_by: 1 )
+g3 = Game.create(title: "Fallout: New Vegas", summary: summary, added_by:1 )
+g4 = Game.create(title: "The Legend of Zelda", summary: summary, added_by: 3 )
+g5 = Game.create(title: "Gears 5", added_by: 1 )
 g6 = Game.create(title: "The Last of Us", added_by: 2 )
-g7 = Game.create(title: "Dragon Quest Builders", custom: true, added_by: 3 )
-g8 = Game.create(title: "Dragon Quest Builders 2", custom: true, added_by:2 )
+g7 = Game.create(title: "Dragon Quest Builders", added_by: 3 )
+g8 = Game.create(title: "Dragon Quest Builders 2", added_by:2 )
 
 
 p1 = Platform.create(name: "Xbox One")
