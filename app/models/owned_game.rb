@@ -4,6 +4,8 @@ class OwnedGame < ApplicationRecord
 
   has_many :notes
 
+  scope :recently_added, -> { order(created_at: :desc).limit(3).distinct }
+
   def get_status
     self.completed ? "Completed" :
     self.currently_playing ? "Currently Playing" :
