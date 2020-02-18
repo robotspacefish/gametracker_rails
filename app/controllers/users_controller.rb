@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_not_logged_in, except: [:new, :create]
+  before_action :redirect_if_logged_in, only: [:new, :create]
 
   def index
     @users = User.sort_by_username
