@@ -19,26 +19,28 @@ class GamesController < ApplicationController
   end
 
   def create
-    if params[:game][:platform_ids].filter { |p| !p.blank? }.empty?
-      flash[:message] = "You must select at least 1 platform."
-      render :new
-    elsif @game = Game.where("LOWER(title) LIKE ?", params[:game][:title]).take
+    @game = Game.new(game_params)
+
+    if empty_params?(params[:game][:platform_ids])
+      @game.errors.add(:platform, "select at least 1")
+    end
+
+    if params[:game][:title].blank?
+      @game.errors.add(:title, "cannot be blank")
+    end
+
+    if Game.exists_by_title?(params[:game][:title])
       if current_user.owns_game_by_instance?(@game)
-        flash[:message] = "You already own #{@game.title}."
+        @game.errors.add(:game, "already exists in your collection")
       else
-        flash[:message] = "#{@game.title} already exists. You can add it here."
+        @game.errors.add(:game, "already exists in the database")
       end
+    end
 
-      redirect_to game_path(@game)
+    if @game.errors.empty? && @game.save
+      redirect_to new_game_owned_game_path(@game)
     else
-      @game = Game.new(game_params)
-
-      if @game.save!
-        redirect_to new_game_owned_game_path(@game)
-      else
-        flash[:message] = "failed to add game to database"
-        render :new
-      end
+      render :new
     end
   end
 
