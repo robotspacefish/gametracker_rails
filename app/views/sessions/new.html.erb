@@ -1,6 +1,8 @@
 <%= display_title("Log In") %>
 
-<%= form_for(:user) do |f| %>
+<%= render 'layouts/errors', { object: @user } %>
+
+<%= form_for(@user, url: login_path ) do |f| %>
   <%= f.label :username %>
   <%= f.text_field :username %><br>
   <%= f.label :password %>
