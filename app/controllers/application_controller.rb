@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
     def is_current_user?(user)
       user == current_user
     end
+
+    def empty_params?(params)
+      params.filter { |p| !p.blank? }.empty?
+    end
+
+
 end
