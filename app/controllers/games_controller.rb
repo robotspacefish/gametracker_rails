@@ -32,7 +32,6 @@ class GamesController < ApplicationController
       redirect_to game_path(@game)
     else
       @game = Game.new(game_params)
-      @game.custom = true
 
       if @game.save!
         redirect_to new_game_owned_game_path(@game)
