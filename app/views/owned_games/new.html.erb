@@ -10,18 +10,9 @@
     </div>
   </div>
 
-  <div class="form-check">
-    <%= f.radio_button :status, "want_to_play", class: "form-check-input" %>
-    <%= f.label :want_to_play, class: "form-check-label"  %>
-  </div>
-  <div class="form-check">
-    <%= f.radio_button :status, "currently_playing", class: "form-check-input" %>
-    <%= f.label :currently_playing, class: "form-check-label"  %>
-  </div>
-  <div class="form-check">
-    <%= f.radio_button :status, "completed", class: "form-check-input" %>
-    <%= f.label :completed, class: "form-check-label"  %>
-  </div>
+  <%= render 'radio_button', { input_name: :status, input_label: :want_to_play, f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: :currently_playing, f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: :completed, f: f} %>
 
   <%= f.hidden_field :game_id, value: @game.id %>
 
