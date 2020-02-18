@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
-  def home
-    redirect_to user_path(current_user) if logged_in?
-  end
-
+  before_action :redirect_if_logged_in, only: [:new, :create]
   def new
     @user = User.new
   end
