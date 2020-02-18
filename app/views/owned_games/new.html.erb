@@ -6,15 +6,15 @@
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
   <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: false) %>
   <div class="form-check">
-    <%= f.radio_button :want_to_play, "want_to_play", class: "form-check-input" %>
+    <%= f.radio_button :status, "want_to_play", class: "form-check-input" %>
     <%= f.label :want_to_play, class: "form-check-label"  %>
   </div>
   <div class="form-check">
-    <%= f.radio_button :currently_playing, "currently_playing", class: "form-check-input" %>
+    <%= f.radio_button :status, "currently_playing", class: "form-check-input" %>
     <%= f.label :currently_playing, class: "form-check-label"  %>
   </div>
   <div class="form-check">
-    <%= f.radio_button :completed, "completed", class: "form-check-input" %>
+    <%= f.radio_button :status, "completed", class: "form-check-input" %>
     <%= f.label :completed, class: "form-check-label"  %>
   </div>
 
