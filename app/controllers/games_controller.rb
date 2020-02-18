@@ -20,6 +20,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    @game.added_by = current_user.id
 
     if empty_params?(params[:game][:platform_ids])
       @game.errors.add(:platform, "select at least 1")
