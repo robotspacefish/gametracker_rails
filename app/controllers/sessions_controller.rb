@@ -11,8 +11,9 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_games_path(user)
     else
-      flash[:message] = "Incorrect login information. Please try again"
-      redirect_to login_path
+      @user = User.new
+      @user.errors.add(:invalid, "login information. Please try again")
+      render :new
     end
   end
 
