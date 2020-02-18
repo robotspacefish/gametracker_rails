@@ -28,4 +28,8 @@ class Game < ApplicationRecord
     user = User.find_by(id: self.added_by)
     user ? user.username : nil
   end
+
+  def self.exists_by_title?(title)
+    Game.where("LOWER(title) LIKE ?", title).take
+  end
 end
