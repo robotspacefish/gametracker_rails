@@ -25,11 +25,7 @@
 <h1 class="display-1 text-center"><%= @game.title %></h1>
 
 <h6 class="text-center">
-  <% @game.platforms.each do |p| %>
-    <span class=<%= current_user.owns_game_platform?(@game.id, p.id) ? "text-dark" : "font-weight-light text-muted"  %>>
-      <%= p.name %>
-    </span>
-  <% end %>
+  <%= render 'game_platforms', { game: @game } %>
 </h6>
 
 <div class="my-4">
