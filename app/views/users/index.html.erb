@@ -1,7 +1,12 @@
-<h1>Users</h1>
+<%= display_title("Users") %>
 
-<ul>
-  <% @users.each do |user| %>
-    <li><%= user.username %> owns <%= pluralize(user.games.total_by_title, "game") %></li>
-  <% end %>
-</ul>
+<% @users.each do |user| %>
+  <article class="mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
+    <div class="tc">
+       <%= display_avatar(user) %>
+      <h1 class="f3 mb2"><%= user.username %></h1>
+      <h2 class="f5 fw4 gray mt0">owns <%= pluralize(user.games.total_by_title, "game") %></h2>
+    </div>
+</article>
+
+<% end %>

@@ -5,32 +5,38 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <nav>
-      <% if logged_in? %>
-        <div>
-          <%= link_to "Games", games_path %>
-          <%= link_to "Create Game", new_game_path %>
-        </div>
-        <div>
-          <%= link_to "#{current_user.username} Home", user_path(current_user) %> |
-          <%= link_to "My Collection", user_games_path(current_user) %> |
-          <%= link_to "My Account", user_account_path(current_user) %> |
-          <%= link_to "Log Out", logout_path, method: 'delete' %>
-        </div>
-      <% else %>
-        <%= link_to "Log In", login_path %>
-        <%= link_to "Sign Up", signup_path %>
-      <% end %>
-
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+      <a class="navbar-brand" href="/">GameTracker</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-nav collapse navbar-collapse" id="navbarNavDropdown">
+        <% if logged_in? %>
+          <%= link_to "Games", games_path, class: "nav-item nav-link" %>
+          <%= link_to "Add New Game", new_game_path, class: "nav-item nav-link" %>
+          <%= link_to "#{current_user.username} Home", user_path(current_user), class: "nav-item nav-link" %>
+          <%= link_to "My Collection", user_games_path(current_user), class: "nav-item nav-link" %>
+          <%= link_to "Account", user_account_path(current_user), class: "nav-item nav-link" %>
+          <%= link_to "Log Out", logout_path, method: 'delete', class: "nav-item nav-link" %>
+        <% end %>
+      </div>
     </nav>
-
     <%= flash[:message] if flash[:message] %>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

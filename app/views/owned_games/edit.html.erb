@@ -1,36 +1,19 @@
-<h1>Edit <%= @owned_game.game.title %> Ownership</h1>
+<%= display_title("Edit #{@owned_game.game.title} Ownership") %>
+
 <%= form_with(model: @owned_game, url: owned_game_path(@owned_game)) do |f| %>
-  <%= f.label :platform_ids, "Select Platform(s)" %><br>
-  <br>
-  <% @owned_game.game.platforms.each do |p| %>
-    <%= check_box_tag :platform_ids,p.name, current_user.owns_game_platform?(@owned_game.game.id, p.id)  %>
-    <label><%= p.name %></label>
-  <% end %>
-  <br><br>
-  <%= radio_button_tag status[:currently_playing], true, @owned_game.currently_playing %>
-  <%
-=begin%>
- <%= f.radio_button  :currently_playing, true, options: {checked: @owned_game.currently_playing } %>
-  <label>Currently Playing</label>
-  <%= f.radio_button  :want_to_play, true, options: {checked: @owned_game.want_to_play } %>
-  <label>Want to Play</label>
-  <%= f.radio_button  :completed, true, options: {checked: @owned_game.completed } %>
-  <label>Completed</label>
-<%
-=end%>
-<%
-=begin%>
+  <%= f.label :platform_ids, "Select Platform(s)", class: "col-form-label" %>
 
-  <input type="radio" id="currently_playing" name="owned_game[status]" value=@owned_game.currently_playing >
-  <label for="male">Currently Playing</label>
+  <div class="form-row align-items-center">
+    <% @owned_game.game.platforms.each do |p| %>
+      <div class="form-check">
+        <%= check_box_tag :platform_ids, p.name, current_user.owns_game_platform?(@owned_game.game.id, p.id), class: "form-check-input"  %>
+        <%= f.label :completed, p.name, class: "form-check-label mr-3" %>
+      </div>
 
-  <input type="radio" id="want_to_play" name="owned_game[status]" value=@owned_game.want_to_play >
-  <label for="male">Want to Play</label>
+    <% end %>
+  </div>
 
-  <input type="radio" id="completed" name="owned_game[status]" value=@owned_game.completed >
-  <label for="male">Completed</label><br>
-<%
-=end%>
-  <br><br>
-  <%= f.submit "Update" %>
+
+
+  <%= f.submit "Update", class: submit_button_classes %>
 <% end %>

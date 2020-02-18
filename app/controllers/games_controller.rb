@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   def index
     if params[:user_id]
       if is_current_user?(User.find_by(id: params[:user_id]))
-        @games = current_user.games
+        @games = current_user.games.sort_by_title
       else
         flash[:message] =  "Access denied."
         redirect_to games_path
@@ -19,32 +19,29 @@ class GamesController < ApplicationController
   end
 
   def create
-    if @game = Game.where("LOWER(title) LIKE ?", params[:game][:title]).take
+    @game = Game.new(game_params)
+    @game.added_by = current_user.id
+
+    if empty_params?(params[:game][:platform_ids])
+      @game.errors.add(:platform, "select at least 1")
+    end
+
+    if params[:game][:title].blank?
+      @game.errors.add(:title, "cannot be blank")
+    end
+
+    if Game.exists_by_title?(params[:game][:title])
       if current_user.owns_game_by_instance?(@game)
-        flash[:message] = "You already own #{@game.title}."
+        @game.errors.add(:game, "already exists in your collection")
       else
-        flash[:message] = "#{@game.title} already exists. You can add it here."
+        @game.errors.add(:game, "already exists in the database")
       end
+    end
 
-      redirect_to game_path(@game)
+    if @game.errors.empty? && @game.save
+      redirect_to new_game_owned_game_path(@game)
     else
-      @game = Game.new(game_params)
-      @game.custom = true
-
-      if @game.save!
-        # add to user's collection
-        current_user.games << @game
-
-        @game.platforms.each do |p|
-          current_user.add_games_platform_by_game_and_platform(@game, p)
-        end
-
-        flash[:message] = "Successfully added #{@game.title} to your collection"
-        redirect_to game_path(@game)
-      else
-        flash[:message] = "failed to add game to database"
-        render :new
-      end
+      render :new
     end
   end
 

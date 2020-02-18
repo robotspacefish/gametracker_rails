@@ -1,21 +1,27 @@
-<h1>Add <%= @game.title %></h1>
+<%= display_title("Add #{@game.title} to Your Collection") %>
+
 <p><%= @game.summary %></p>
 
 <%= form_for(:owned_game, url: game_owned_games_path) do |f| %>
   <%= f.label :platform_ids, "Select Platform(s)" %><br>
   <%= f.collection_check_boxes(:platform_ids, @game.platforms, :id, :name, checked: false) %>
-  <br><br>
-
-  <%= f.label "Select Status" %><br>
-  <%= f.check_box :currently_playing %>
-  <%= f.label :currently_playing %>
-
-  <%= f.check_box :want_to_play %>
-  <%= f.label :want_to_play %>
-
-  <%= f.check_box :completed %>
-  <%= f.label :completed %>
+  <div class="form-check">
+    <%= f.radio_button :want_to_play, "want_to_play", class: "form-check-input" %>
+    <%= f.label :want_to_play, class: "form-check-label"  %>
+  </div>
+  <div class="form-check">
+    <%= f.radio_button :currently_playing, "currently_playing", class: "form-check-input" %>
+    <%= f.label :currently_playing, class: "form-check-label"  %>
+  </div>
+  <div class="form-check">
+    <%= f.radio_button :completed, "completed", class: "form-check-input" %>
+    <%= f.label :completed, class: "form-check-label"  %>
+  </div>
 
   <%= f.hidden_field :game_id, value: @game.id %>
-  <%= f.submit "Add to Collection" %>
+
+  <div class="row">
+    <%= f.submit "Add to Collection", class: submit_button_classes %>
+    <%= link_to "Cancel", games_path, class: "btn btn-danger mt-4 ml-2" %>
+  </div>
 <% end %>

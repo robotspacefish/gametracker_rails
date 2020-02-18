@@ -1,4 +1,4 @@
-<h1>Log in</h1>
+<%= display_title("Log In") %>
 
 <%= form_for(:user) do |f| %>
   <%= f.label :username %>
@@ -6,5 +6,5 @@
   <%= f.label :password %>
   <%= f.password_field :password %><br>
 
-  <%= f.submit "Log In" %>
+  <%= f.submit "Log In", class: submit_button_classes %>
 <% end %>

@@ -1,4 +1,4 @@
-<h1><%= @user.username %>'s Account</h1>
+<%= display_title("#{@user.username}'s Account") %>
 
 <%= form_for(@user) do |f| %>
   <%= f.label :username, "Update Username" %>
@@ -9,9 +9,9 @@
   <%= f.text_field :password %><br>
   <%= f.label :password_confirmation, "Password Confirmation" %>
   <%= f.text_field :password_confirmation %><br>
-  <%= f.submit %>
+  <%= f.submit class: submit_button_classes %>
 <% end %>
 
 <%= form_for(@user, method: 'delete') do |f| %>
-  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'} %>
+  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'}, class: "btn btn-danger" %>
 <% end %>

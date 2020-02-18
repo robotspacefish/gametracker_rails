@@ -12,6 +12,12 @@ class User < ApplicationRecord
 
   scope :sort_by_username, -> { order(:username) }
 
+  def recently_added_games
+    self.owned_games.recently_added.collect do |og|
+      Game.find_by(id: og.game_id)
+    end
+  end
+
   def owns_game_platform?(g_id, p_id)
     gp = GamesPlatform.find_by(game_id: g_id, platform_id: p_id)
     self.games_platforms.include?(gp)
@@ -63,5 +69,9 @@ class User < ApplicationRecord
 
   def added_game?(game)
     self.id == game.added_by
+  end
+
+  def get_avatar_url
+    "https://robohash.org/#{self.username}"
   end
 end

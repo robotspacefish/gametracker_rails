@@ -1,17 +1,6 @@
-<h1>Sign Up</h1>
+<%= display_title("Sign Up") %>
 
-
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
-
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render 'layouts/errors', { object: @user } %>
 
 <%= form_for(@user) do |f| %>
   <%= f.label :username %>
@@ -23,5 +12,5 @@
 
   <%= f.label :password_confirmation, "Confirm Password" %>
   <%= f.password_field :password_confirmation %><br>
-  <%= f.submit "Sign Up" %>
+  <%= f.submit "Sign Up", class: submit_button_classes %>
 <% end %>

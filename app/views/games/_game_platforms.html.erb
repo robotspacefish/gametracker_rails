@@ -1,0 +1,5 @@
+<% game.platforms.each do |p| %>
+  <span class=<%= current_user.owns_game_platform?(game.id, p.id) ? "text-darker" : "font-weight-light text-muted"  %>>
+    <%= p.name %>
+  </span>
+<% end %>

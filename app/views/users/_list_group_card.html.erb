@@ -1,0 +1,12 @@
+<div class="col-auto mt-4">
+  <div class="card" style="width: 18rem;">
+    <div class="card-header font-weight-bold text-light text-center bg-dark">
+     <%= header_text %>
+    </div>
+    <ul class="list-group list-group-flush">
+    <% games.each do |game| %>
+        <li class="list-group-item"><%= link_to game.title, game_path(game) %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

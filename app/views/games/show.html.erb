@@ -1,47 +1,79 @@
-<h1><%= @game.title %></h1>
-<h2><%= "[Added by #{@game.get_added_by_username}]" if @game.added_by %></h2>
-<% if current_user.owns_game_by_instance?(@game) %>
-  <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id) %>
-<% else %>
-  <%= link_to "Add to Collection", new_game_owned_game_path(@game.id) %>
-<% end %>
-
-<%= link_to "Edit Game Info", edit_game_path(@game) if current_user.added_game?(@game) %>
-
-<p><strong>Platforms:</strong></p>
-
-<% @game.platforms.each do |p| %>
-  <%= p.name %>
-<% end %>
-
-<p><%= @game.summary %></p>
-
-<% if @owned_game %>
-  <h3>You own this game on <%= owned_platforms_as_string(current_user, @game) %> </h3>
-
-  <hr>
-
-  <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
-    <%= f.submit "Delete From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'} %>
+<div class="row d.flex justify-content-end mt-3 mr-1">
+  <% if !@owned_game %>
+    <div class="col-auto justify-self-center">
+      <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
+    </div>
   <% end %>
 
-  <h3>Notes/Objectives</h3>
-  <%= link_to "Add Note", new_game_note_path(@game) %>
-  <br>
+  <span class="text-muted font-weight-light">
+    <% if current_user.added_game?(@game) %>
+      <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" %>
+    <% elsif @game.added_by %>
+      <%= "[Added by #{@game.get_added_by_username}]" %>
+    <% end %>
+  </span>
+</div>
+
+<% if @owned_game %>
+  <div class="row m-4 d.flex justify-content-center">
+    <div class="col-auto">
+      <h4><span class="badge badge-pill badge-success">Status: <%= @owned_game.get_status %></span></h4>
+    </div>
+  </div>
+<% end %>
+
+<h1 class="display-1 text-center"><%= @game.title %></h1>
+
+<h6 class="text-center">
+  <%= render 'game_platforms', { game: @game } %>
+</h6>
+
+<div class="my-4">
+  <h3 class="display-6">Summary:</h3>
+  <p><%= @game.summary %></p>
+</div>
+
+<% if @owned_game %>
+  <hr class="my-4">
+
+  <div class="row d-flex justify-content-end mr-1 mb-3">
+    <%= link_to "Edit Game Ownership", edit_owned_game_path(@game.id), class: "btn btn-outline-primary mr-3" %>
+    <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
+      <%= f.submit "Delete Game From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+
+  <h3 class="display-4 text-center">Notes/Objectives</h3>
+
+  <div class="row d-flex justify-content-end mr-1">
+    <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
+  </div>
 
   <% @owned_game.notes.sort_newest_first.each do |note| %>
-    <hr>
-    <div>
-      <p><%= note.title %></p>
-      <%= human_readable_datetime(note.created_at) %>
-      <% if note.completed %>
-        <p><strong>Objective Completed</strong></p>
-      <% end %>
+    <div class="card my-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-9">
+            <h5 class="card-title <%='strikethrough' if note.completed %>" >
+              <%= note.title %>
+            </h5>
+          </div>
+          <div class="col-sm-3">
+            <h6 class="card-subtitle mb-2 text-muted"><%= human_readable_datetime(note.created_at) %></h6>
+          </div>
+        </div>
+        <p class="card-text"><%= note.content %></p>
+        <div class="row justify-content-end">
+          <div class="d-inline-flex col-auto mr-3">
+            <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm mr-2" %>
 
-      <p><%= note.content %></p>
-      <%= link_to "Edit Note", edit_note_path(note) %>
-      <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."} %>
+
+            <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+          </div>
+        </div>
+      </div>
     </div>
+    <div>
   <% end %>
 
 <% end %>

@@ -4,6 +4,14 @@ class OwnedGame < ApplicationRecord
 
   has_many :notes
 
+  scope :recently_added, -> { order(created_at: :desc).limit(3).distinct }
+
+  def get_status
+    self.completed ? "Completed" :
+    self.currently_playing ? "Currently Playing" :
+    "Want to Play"
+  end
+
   def self.remove_blanks_from_array(array)
     array.filter! { |data| !data.blank? }
   end
@@ -18,7 +26,6 @@ class OwnedGame < ApplicationRecord
     gps = get_game_platforms(params)
 
     return false if gps.empty?
-
     og = OwnedGame.new(
       user_id: user_id,
       game_id: params["game_id"],

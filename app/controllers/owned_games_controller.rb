@@ -16,9 +16,7 @@ class OwnedGamesController < ApplicationController
   end
 
   def create
-    # todo require a platform select
     success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
-
     if !success
       flash[:message] = "Select at least 1 platform"
       @game = Game.find_by(id: params[:owned_game][:game_id])
