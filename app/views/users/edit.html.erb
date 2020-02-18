@@ -1,16 +1,8 @@
 <%= display_title("#{@user.username}'s Account") %>
 
-<%= form_for(@user) do |f| %>
-  <%= f.label :username, "Update Username" %>
-  <%= f.text_field :username %><br>
-  <%= f.label :email, "Update Email" %>
-  <%= f.text_field :email %><br>
-  <%= f.label :password, "Update Password" %>
-  <%= f.text_field :password %><br>
-  <%= f.label :password_confirmation, "Password Confirmation" %>
-  <%= f.text_field :password_confirmation %><br>
-  <%= f.submit class: submit_button_classes %>
-<% end %>
+<h2>Update Information</h2>
+
+<%= render 'form', { user: @user } %>
 
 <%= form_for(@user, method: 'delete') do |f| %>
   <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'}, class: "btn btn-danger" %>
