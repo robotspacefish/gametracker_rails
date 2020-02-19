@@ -69,6 +69,6 @@ OwnedGame.second.notes.create(title: "Venenatis Magna Cras")
 
 OwnedGame.second.notes.create(title: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.")
 
-OwnedGame.first.update(currently_playing: true)
-OwnedGame.second.update(completed: true)
-OwnedGame.third.update(completed: true)
+OwnedGame.first.update(status: :currently_playing)
+OwnedGame.second.update(status: :completed)
+OwnedGame.third.update(status: :completed)
