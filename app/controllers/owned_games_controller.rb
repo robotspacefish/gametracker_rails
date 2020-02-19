@@ -45,4 +45,8 @@ class OwnedGamesController < ApplicationController
     def owned_game_params
       params.require(:owned_game).permit(:status, :game_id, platform_ids: [])
     end
+
+    def valid_status?
+      OwnedGame.statuses.include?(params[:commit])
+    end
 end
