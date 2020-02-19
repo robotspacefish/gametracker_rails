@@ -29,9 +29,7 @@ class OwnedGame < ApplicationRecord
     og = OwnedGame.new(
       user_id: user_id,
       game_id: params["game_id"],
-      completed: params["completed"],
-      currently_playing: params["currently_playing"],
-      want_to_play: params["want_to_play"]
+      status: params["status"]
     )
 
     owned_games = []
