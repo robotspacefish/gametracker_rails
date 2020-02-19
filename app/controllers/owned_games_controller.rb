@@ -43,6 +43,6 @@ class OwnedGamesController < ApplicationController
 
   private
     def owned_game_params
-      params.require(:owned_game).permit(:currently_playing, :want_to_play, :completed, :game_id, platform_ids: [])
+      params.require(:owned_game).permit(:status, :game_id, platform_ids: [])
     end
 end
