@@ -14,7 +14,7 @@
   </span>
 </div>
 
-<% if @owned_game %>
+<% if @owned_game && @owned_game.status %>
   <div class="row m-4 d.flex justify-content-center">
     <div class="col-auto">
       <h4><span class="badge badge-pill badge-success">Status: <%= @owned_game.status %></span></h4>
