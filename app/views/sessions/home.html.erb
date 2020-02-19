@@ -1,1 +1,9 @@
-<h1>GameTracker Home Page</h1>
+<div class="jumbotron bg-white">
+  <h1 class="display-4">GameTracker</h1>
+  <p class="lead">Keep track of your ever-growing game collection and see what games other users own!</p>
+  <hr class="my-4">
+
+  <%= link_to "Login", login_path, class: "btn btn-outline-dark" %>
+  <%= link_to "Sign Up", signup_path, class: "btn btn-dark" %>
+  <%= link_to "Google Login", '/auth/google_oauth2', class: "btn btn-outline-primary" %>
+</div>

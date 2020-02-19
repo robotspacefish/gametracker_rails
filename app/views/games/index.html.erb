@@ -1,22 +1,25 @@
-<h1>Games</h1>
+<%= display_title("Games") %>
 
 <% if !@games %>
-  <h2>Games will show up once users start adding them!</h2>
+  <h2 class="display-2 text-center">Games will show up once users start adding them!</h2>
 <% else %>
-  <% @games.each do |game| %>
-    <div>
-      <%= link_to game.title, game_path(game) %>
-      -
-      <% game.platforms.each do |p| %>
-        <% if current_user.owns_game_platform?(game.id, p.id) %>
-            <%= p.name %> [Owned]
-        <% else %>
-          <%= form_for(game) do |f| %>
-            <%= f.submit "Add for #{p.name}"%>
+  <ul class="list-group">
+    <% @games.each do |game| %>
+      <li class="list-group-item d-flex  align-items-center">
+        <div class="col-4">
+          <%= link_to game.title, game_path(game), class: "text-dark font-weight-bolder" %>
+        </div>
+        <div class="col-4">
+          <h6><%= render 'game_platforms', { game: game } %></h6>
+        </div>
+        <div class="col-4 text-right">
+           <% if game.platforms.any? { |p| current_user.owns_game_platform?(game.id, p.id) } %>
+            <span class="badge badge-success badge-pill"><%= current_user.find_owned_game_by_game_id(game.id).status %></span>
+          <% else %>
+            <%= link_to "Add Game to Collection", new_game_owned_game_path(game) %>
           <% end %>
-        <% end %>
-      <% end %>
-      <br>
-    </div>
-  <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 <% end %>

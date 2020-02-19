@@ -4,3 +4,8 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+desc "Import Platforms from API to DB"
+task :import_platforms do
+  Platform.setup_platforms
+end

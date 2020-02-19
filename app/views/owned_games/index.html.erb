@@ -1,14 +1,13 @@
-<% if !@owned_games %>
+<% if @owned_games.empty? %>
   <h2>You have no games in your library!<h2>
 <% else %>
-  <h4>TODO: Display Game titles with platforms owned</h4>
-
   <ul>
     <% @owned_games.each do |g| %>
-      <li>
+      <div>
         <%= link_to g.title, game_path(g) %>
         - <%= g.which_platforms?(current_user).join(' | ') %>
-      </li>
+      </div>
+      <br>
     <% end %>
   </ul>
 <% end %>

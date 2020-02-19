@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_if_not_logged_in, except: [:new, :create]
+  before_action :redirect_if_logged_in, only: [:new, :create]
 
   def index
     @users = User.sort_by_username
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_collection_path(@user) #todo change
+      redirect_to games_path
     else
       render :new
     end

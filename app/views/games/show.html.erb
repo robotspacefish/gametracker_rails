@@ -1,21 +1,99 @@
+<div class="row d.flex justify-content-end mt-3 mr-1">
+  <% if !@owned_game %>
+    <div class="col-auto justify-self-center">
+      <%= link_to "Add to Collection", new_game_owned_game_path(@game.id), class: "btn btn-outline-secondary btn-sm" %>
+    </div>
+  <% end %>
 
-<h1><%= @game.title %> <%= "[Custom]" if @game.custom %></h1>
-<%= link_to "Edit", edit_game_path(@game) if @game.custom %>
+  <span class="text-muted font-weight-light">
+    <% if current_user.added_game?(@game) %>
+      <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" %>
+    <% elsif @game.added_by %>
+      <%= "[Added by #{@game.get_added_by_username}]" %>
+    <% end %>
+  </span>
+</div>
 
-<p><strong>Platforms:</strong></p>
-
-<% @game.platforms.each do |p| %>
-  <%= p.name %>
+<% if @owned_game && @owned_game.status %>
+  <div class="row m-4 d.flex justify-content-center">
+    <div class="col-auto">
+      <h4><span class="badge badge-pill badge-success">Status: <%= @owned_game.status %></span></h4>
+    </div>
+  </div>
 <% end %>
 
-<p><%= @game.summary %></p>
+<h1 class="display-1 text-center"><%= @game.title %></h1>
 
-<p><strong>TODO: Currently Playing / Want to Play / Completed Status </strong></p>
-<hr>
-<h3>TODO: Notes if current user owns this game</h3>
-<p><strong>Next Objective:</strong></p>
-<p><strong>Last Objective Completed:</strong></p>
-<p><strong>Misc:</strong></p>
+<h6 class="text-center">
+  <%= render 'game_platforms', { game: @game } %>
+</h6>
+
+<div class="my-4">
+  <h3 class="display-6">Summary:</h3>
+  <p><%= @game.summary %></p>
+</div>
+
+<% if @owned_game %>
+  <hr class="my-4">
+
+  <div class="row d-flex justify-content-end align-items-center mb-4">
+    <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary" %>
+
+    <div class="btn-group mx-3" role="group" aria-label="Basic example">
+      <% OwnedGame.statuses.each.with_index(1) do |status, index| %>
+
+        <% if @owned_game.status == status %>
+            <button disabled class="btn btn-success" id="status-#{index}"><%= status %></button>
+          <% else %>
+            <%= form_for(@owned_game) do |f| %>
+              <%= f.hidden_field :game_id, value: @game.id %>
+              <%= f.submit status, class: "btn btn-secondary", id:"status-#{index}" %>
+            <% end %>
+
+          <% end %>
+        <% end %>
+      </div>
+    <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
+      <%= f.submit "Delete Game From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+
+  <h3 class="display-4 text-center">Notes/Objectives</h3>
+
+  <%
+=begin%>
+ <div class="row d-flex justify-content-end mr-1">
+    <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+<%
+=end%>
+
+  <% @owned_game.notes.sort_newest_first.each do |note| %>
+    <div class="card my-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-9">
+            <h5 class="card-title <%='strikethrough' if note.completed %>" >
+              <%= note.title %>
+            </h5>
+          </div>
+          <div class="col-sm-3">
+            <h6 class="card-subtitle mb-2 text-muted"><%= human_readable_datetime(note.created_at) %></h6>
+          </div>
+        </div>
+        <p class="card-text"><%= note.content %></p>
+        <div class="row justify-content-end">
+          <div class="d-inline-flex col-auto mr-3">
+            <%= link_to "Edit Note", edit_note_path(note), class: "btn btn-outline-primary btn-sm mr-2" %>
 
 
+            <%= button_to "Delete Note", note_path(note), method: 'delete', data: { confirm: "Are you sure? This cannot be undone."}, class: "btn btn-outline-danger btn-sm" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+  <% end %>
+
+<% end %>
 

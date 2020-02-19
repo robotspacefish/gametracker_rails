@@ -1,0 +1,23 @@
+<%= display_title("Add #{@game.title} to Your Collection") %>
+
+<p><%= @game.summary %></p>
+
+<%= form_for(:owned_game, url: game_owned_games_path) do |f| %>
+  <%= f.label :platform_ids, "Select Platform(s)" %><br>
+  <div class="form-row align-items-center">
+    <div class="form-group col-md-6">
+      <%= f.collection_select :platform_ids, @game.platforms.sort_by_name, :id, :name, {}, { class: "form-control", multiple: true } %>
+    </div>
+  </div>
+
+  <%= render 'radio_button', { input_name: :status, input_label: "Want To Play", f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: "Currently Playing", f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: "Completed", f: f} %>
+
+  <%= f.hidden_field :game_id, value: @game.id %>
+
+  <div class="row">
+    <%= f.submit "Add to Collection", class: submit_button_classes %>
+    <%= link_to "Cancel", games_path, class: "btn btn-danger mt-4 ml-2" %>
+  </div>
+<% end %>

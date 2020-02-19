@@ -1,0 +1,5 @@
+<%= display_title("Create Note For #{@game.title}") %>
+
+<%= form_for([@game, @note]) do |f| %>
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>

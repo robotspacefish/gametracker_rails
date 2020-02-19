@@ -1,3 +1,29 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.game-link:hover li {
+  background-color: #222;
+}
+
+.game-link h5 {
+  color: #222;
+}
+
+.game-link:hover h5 {
+  color: white;
+}
+
+#status-1 {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#status-2 {
+  border-radius: 0;
+}
+
+#status-3 {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

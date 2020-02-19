@@ -1,0 +1,5 @@
+<%= display_title("Edit Note") %>
+
+<%= form_for(@note) do |f| %>
+  <%= render partial: 'form', locals: {f: f} %>
+<% end %>

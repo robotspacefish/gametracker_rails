@@ -1,14 +1,61 @@
 class OwnedGamesController < ApplicationController
   before_action :redirect_if_not_logged_in
 
-  def index
-    user = User.find_by(id: params[:user_id])
-    if params[:user_id] && user && is_current_user?(user)
-      # @owned_games = user.games_platforms
-      @owned_games = user.games.distinct
+  def new
+    @game = Game.find_by(id: params[:game_id])
 
-    else
+    if !@game
+      flash[:message] = "Game does not exist"
       redirect_to games_path
     end
+
+    if current_user.owns_game_by_instance?(@game)
+      flash[:message] = "You already own this game"
+      redirect_to game_path(@game)
+    end
   end
+
+  def create
+    success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
+    if !success
+      flash[:message] = "Select at least 1 platform"
+      @game = Game.find_by(id: params[:owned_game][:game_id])
+      render :new
+      return
+    end
+
+    redirect_to user_games_path(current_user)
+  end
+
+  def update
+    @owned_game = OwnedGame.find_by(id: params[:id])
+    @game = Game.find_by(id: params[:owned_game][:game_id])
+
+    if @owned_game.game == @game && valid_status?
+      @owned_game.update(status: params[:commit])
+      @owned_game.save
+    else
+      flash[:message] = "Invalid Status Type."
+    end
+
+    redirect_to game_path(@game)
+  end
+
+  def destroy
+    @game = Game.find_by(id: params[:id])
+    if @game && current_user.owns_game_by_instance?(@game)
+      current_user.delete_from_collection(@game)
+    end
+
+    redirect_to user_games_path(current_user)
+  end
+
+  private
+    def owned_game_params
+      params.require(:owned_game).permit(:status, :game_id, platform_ids: [])
+    end
+
+    def valid_status?
+      OwnedGame.statuses.include?(params[:commit])
+    end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_213808) do
+ActiveRecord::Schema.define(version: 2020_02_19_003356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 2020_02_10_213808) do
     t.string "title"
     t.string "url"
     t.string "summary"
-    t.string "igdb_id"
     t.boolean "custom"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "added_by"
   end
 
   create_table "games_platforms", force: :cascade do |t|
@@ -38,40 +38,35 @@ ActiveRecord::Schema.define(version: 2020_02_10_213808) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "images", force: :cascade do |t|
-    t.string "height"
-    t.string "width"
-    t.integer "image_id"
-    t.string "url"
-    t.string "type"
-    t.integer "game_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.string "objective_type"
+    t.boolean "completed"
     t.bigint "owned_game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["owned_game_id"], name: "index_notes_on_owned_game_id"
   end
 
   create_table "owned_games", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "games_platform_id"
-    t.boolean "currently_playing"
-    t.boolean "want_to_play"
-    t.boolean "completed"
+    t.bigint "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["games_platform_id"], name: "index_owned_games_on_games_platform_id"
+    t.string "status"
+    t.index ["game_id"], name: "index_owned_games_on_game_id"
     t.index ["user_id"], name: "index_owned_games_on_user_id"
+  end
+
+  create_table "owned_games_platforms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "games_platform_id"
+    t.index ["games_platform_id"], name: "index_owned_games_platforms_on_games_platform_id"
+    t.index ["user_id"], name: "index_owned_games_platforms_on_user_id"
   end
 
   create_table "platforms", force: :cascade do |t|
     t.string "name"
-    t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -80,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_02_10_213808) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.string "uid"
   end
 
 end
