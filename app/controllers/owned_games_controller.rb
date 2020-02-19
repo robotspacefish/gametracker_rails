@@ -28,8 +28,17 @@ class OwnedGamesController < ApplicationController
   end
 
   def update
-    binding.pry
+    @owned_game = OwnedGame.find_by(id: params[:id])
+    @game = Game.find_by(id: params[:owned_game][:game_id])
 
+    if @owned_game.game == @game && valid_status?
+      @owned_game.update(status: params[:commit])
+      @owned_game.save
+    else
+      flash[:message] = "Invalid Status Type."
+    end
+
+    redirect_to game_path(@game)
   end
 
   def destroy
