@@ -13,3 +13,17 @@
 .game-link:hover h5 {
   color: white;
 }
+
+#status-1 {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#status-2 {
+  border-radius: 0;
+}
+
+#status-3 {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
