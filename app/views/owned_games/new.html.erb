@@ -10,9 +10,9 @@
     </div>
   </div>
 
-  <%= render 'radio_button', { input_name: :status, input_label: :want_to_play, f: f} %>
-  <%= render 'radio_button', { input_name: :status, input_label: :currently_playing, f: f} %>
-  <%= render 'radio_button', { input_name: :status, input_label: :completed, f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: "Want To Play", f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: "Currently Playing", f: f} %>
+  <%= render 'radio_button', { input_name: :status, input_label: "Completed", f: f} %>
 
   <%= f.hidden_field :game_id, value: @game.id %>
 
