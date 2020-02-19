@@ -1,9 +1,7 @@
-<%= display_title("#{@user.username}'s Account") %>
-
-<h2>Update Information</h2>
+<%= display_title("Update Account") %>
 
 <%= render 'form', { user: @user, path: user_path(current_user) } %>
 
 <%= form_for(@user, method: 'delete') do |f| %>
-  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'}, class: "btn btn-danger" %>
+  <%= f.submit "Delete Account", data: { confirm: 'Are you sure? This cannot be undone.'}, class: "btn btn-danger mt-4 ml-3" %>
 <% end %>
