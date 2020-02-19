@@ -50,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def currently_playing
-    Game.joins(:owned_games).where('user_id = ? AND currently_playing = ?', self.id, true)
+    Game.joins(:owned_games).where('user_id = ? AND status = ?', self.id, :currently_playing)
   end
 
   def find_owned_game_by_game_id(g_id)
