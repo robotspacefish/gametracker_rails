@@ -4,13 +4,15 @@ class OwnedGame < ApplicationRecord
 
   has_many :notes
 
+  def self.statuses
+    ["Want To Play", "Currently Playing", "Completed"]
+  end
+
   scope :recently_added, -> { order(created_at: :desc).limit(3).distinct }
 
-  def get_status
-    self.completed ? "Completed" :
-    self.currently_playing ? "Currently Playing" :
-    "Want to Play"
-  end
+  # def get_status
+  #   self.status.split('_').each { |word| word.capitalize! }.join(' ')
+  # end
 
   def self.remove_blanks_from_array(array)
     array.filter! { |data| !data.blank? }
