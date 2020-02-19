@@ -7,12 +7,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  get '/signup', to: 'users#new'
-  post '/signup', to: 'users#create'
-
   # had to separate this because it wasn't showing up when it was part of resources :notes
-  delete '/notes/:id', to: 'notes#destroy'
-  resources :notes, only: [:edit, :update]
+  resources :notes, only: [:edit, :update, :destroy]
 
   resources :games do
     resources :owned_games, only: [:new, :create]
