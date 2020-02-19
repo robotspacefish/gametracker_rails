@@ -15,13 +15,16 @@ Rails.application.routes.draw do
     resources :notes, only: [:new, :create]
   end
 
-  resources :owned_games, except: [:index, :show, :new, :create]
+  resources :owned_games, except: [:index, :show, :new, :create, :edit]
 
-  resources :users do
+  resources :users, except: [:new, :create] do
     resources :games, only: [:index]
 
     get '/account', to: 'users#edit'
   end
 
+
+  get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

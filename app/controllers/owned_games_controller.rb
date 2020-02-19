@@ -27,12 +27,9 @@ class OwnedGamesController < ApplicationController
     redirect_to user_games_path(current_user)
   end
 
-  def edit
-    @owned_game = OwnedGame.find_by(user_id: current_user.id, game_id: params[:id])
-  end
-
   def update
     binding.pry
+
   end
 
   def destroy
