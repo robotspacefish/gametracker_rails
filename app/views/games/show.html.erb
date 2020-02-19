@@ -37,6 +37,20 @@
   <hr class="my-4">
 
   <div class="row d-flex justify-content-end mr-1 mb-3">
+    <div class="btn-group mr-4 mb-4" role="group" aria-label="Basic example">
+      <% OwnedGame.statuses.each.with_index(1) do |status, index| %>
+
+        <% if @owned_game.status == status %>
+            <button disabled class="btn btn-success" id="status-#{index}"><%= status %></button>
+          <% else %>
+            <%= form_for(@owned_game) do |f| %>
+              <%= f.hidden_field :game_id, value: @game.id %>
+              <%= f.submit status, class: "btn btn-secondary", id:"status-#{index}" %>
+            <% end %>
+
+          <% end %>
+        <% end %>
+      </div>
     <%= form_for(@owned_game, url: owned_game_path(@game), method: 'delete') do |f| %>
       <%= f.submit "Delete Game From Collection", data: { confirm: 'Are you Sure? You will lose all your notes'}, class: "btn btn-danger" %>
     <% end %>
