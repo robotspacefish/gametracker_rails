@@ -60,14 +60,6 @@
 
   <h3 class="display-4 text-center">Notes/Objectives</h3>
 
-  <%
-=begin%>
- <div class="row d-flex justify-content-end mr-1">
-    <%= link_to "Add Note", new_game_note_path(@game), class: "btn btn-outline-secondary btn-sm" %>
-  </div>
-<%
-=end%>
-
   <% @owned_game.notes.sort_newest_first.each do |note| %>
     <div class="card my-4">
       <div class="card-body">
