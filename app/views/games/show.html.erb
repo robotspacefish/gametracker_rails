@@ -9,7 +9,7 @@
     <% if current_user.added_game?(@game) %>
       <%= link_to "Edit Game Info", edit_game_path(@game), class: "btn btn-outline-primary btn-sm" %>
     <% elsif @game.added_by %>
-      <%= "[Added by #{@game.get_added_by_username}]" %>
+      <%= "[Added by #{@game.get_added_by_username ? @game.get_added_by_username : 'Deleted User' }]" %>
     <% end %>
   </span>
 </div>
