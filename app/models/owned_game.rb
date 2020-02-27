@@ -25,9 +25,13 @@ class OwnedGame < ApplicationRecord
   end
 
   def self.create_owned_games_from_params(params, user_id)
+    # get the game_platform relationship(s) of a game the user wants to add on the platform(s) they selected
     gps = get_game_platforms(params)
 
+    # return early if the user did not choose any platform(s)
     return false if gps.empty?
+
+    # create a relationship between the game and user
     og = OwnedGame.new(
       user_id: user_id,
       game_id: params["game_id"],
@@ -37,12 +41,14 @@ class OwnedGame < ApplicationRecord
     owned_games = []
 
     if og.save
+      # create a relationship between the user and whichever games_platforms they selected
       owned_games = gps.collect do |gp|
       ogs = OwnedGamesPlatform.new(user_id: user_id, games_platform_id: gp.id)
       ogs.save
       end
     end
 
+    # return true/false if all relationships correctly saved to the db or not
     owned_games.all?
   end
 end

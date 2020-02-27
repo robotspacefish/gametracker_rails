@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  # had to separate this because it wasn't showing up when it was part of resources :notes
   resources :notes, only: [:edit, :update, :destroy]
 
   resources :games do
@@ -23,8 +22,8 @@ Rails.application.routes.draw do
     get '/account', to: 'users#edit'
   end
 
-
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

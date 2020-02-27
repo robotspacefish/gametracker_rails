@@ -16,9 +16,14 @@ class OwnedGamesController < ApplicationController
   end
 
   def create
+    # set up relationships between the user and game and user and games_platforms
+    # return true/false if successful or not
     success = OwnedGame.create_owned_games_from_params(params[:owned_game], current_user.id)
+
     if !success
       flash[:message] = "Select at least 1 platform"
+
+      # set the game up for the re-render
       @game = Game.find_by(id: params[:owned_game][:game_id])
       render :new
       return
@@ -56,6 +61,8 @@ class OwnedGamesController < ApplicationController
     end
 
     def valid_status?
+      # valid statuses are "Want To Play", "Currently Playing", "Completed"
+      # Checking for validity against a malicious user altering the html
       OwnedGame.statuses.include?(params[:commit])
     end
 end
